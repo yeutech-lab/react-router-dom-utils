@@ -52,5 +52,9 @@
       "name": "Code of conduct",
       "content": "CODE_OF_CONDUCT.md"
     }
-  ]
+  ],
+  "ribbon": {
+    "url": "https://github.com/yeutech-lab/react-router-dom-utils",
+    "text": "Fork us on GitHub"
+  }
 }
