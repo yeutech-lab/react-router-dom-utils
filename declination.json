@@ -1,0 +1,12 @@
+{
+  "globals": {
+    "react": "React",
+    "react-dom": "ReactDom",
+    "react-router-dom": "react-router-dom"
+  },
+  "external": [
+    "react",
+    "react-dom",
+    "react-router-dom"
+  ]
+}
