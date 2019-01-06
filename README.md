@@ -7,13 +7,13 @@ Utilities for web applications that use react-router-dom.
 
 **Master**
 
-[![build status](https://module.kopaxgroup.com/dka/react-router-dom-utils/badges/master/build.svg)](https://module.kopaxgroup.com/dka/react-router-dom-utils/commits/master)
-[![coverage report](https://module.kopaxgroup.com/dka/react-router-dom-utils/badges/master/coverage.svg)](https://module.kopaxgroup.com/dka/react-router-dom-utils/commits/master)
+[![build status](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/badges/master/build.svg)](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/commits/master)
+[![coverage report](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/badges/master/coverage.svg)](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/commits/master)
 
 **Dev**
 
-[![build status](https://module.kopaxgroup.com/dka/react-router-dom-utils/badges/dev/build.svg)](https://module.kopaxgroup.com/dka/react-router-dom-utils/commits/dev)
-[![coverage report](https://module.kopaxgroup.com/dka/react-router-dom-utils/badges/dev/coverage.svg)](https://module.kopaxgroup.com/dka/react-router-dom-utils/commits/dev)
+[![build status](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/badges/dev/build.svg)](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/commits/dev)
+[![coverage report](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/badges/dev/coverage.svg)](https://module.kopaxgroup.com/yeutech/react-router-dom-utils/commits/dev)
 
 
 ## Table of Contents
