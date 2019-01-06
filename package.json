@@ -1,6 +1,6 @@
 {
   "name": "@yeutech/react-router-dom-utils",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Utilities for web applications that use react-router-dom",
   "main": "lib/index.js",
   "jsnext:main": "dist/@yeutech/react-router-dom-utils.esm.js",
@@ -38,7 +38,8 @@
     "prestyleguide": "npm run jsdoc",
     "styleguide": "styleguidist server",
     "prestyleguide:build": "npm run jsdoc",
-    "styleguide:build": "styleguidist build"
+    "styleguide:build": "styleguidist build",
+    "postinstall": "node -e \"console.log('\\u001b[31m@yeutech/react-router-dom-utils is deprecated, use @yeutech-lab/react-router-dom-utils instead.')\" || exit 0"
   },
   "repository": {
     "type": "git",
