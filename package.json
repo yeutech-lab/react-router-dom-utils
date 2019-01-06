@@ -359,24 +359,5 @@
     "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js"
   },
   "declinationId": "react",
-  "contributors": [],
-  "transitive": {
-    "name": "react-router-dom-utils",
-    "scope": "yeutech-lab",
-    "scopedName": "@yeutech-lab/react-router-dom-utils",
-    "jsnext:main": "dist/@yeutech-lab/react-router-dom-utils.esm.js",
-    "module": "dist/@yeutech-lab/react-router-dom-utils.esm.js",
-    "homepage": "https://yeutech-lab.github.io/react-router-dom-utils",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/yeutech-lab/react-router-dom-utils.git"
-    },
-    "bugs": {
-      "url": "https://github.com/yeutech-lab/react-router-dom-utils/issues"
-    },
-    "publishConfig": {
-      "access": "public",
-      "registry": "https://registry.npmjs.org"
-    }
-  }
+  "contributors": []
 }
