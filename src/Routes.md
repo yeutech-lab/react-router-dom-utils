@@ -164,3 +164,5 @@ const createNavigation = (routes, padding = 0) => (
   </Switch>
 </Router>
 ```
+
+You can play with the same example on [codesandbox.io](https://codesandbox.io/s/yqyro6lkvx);
