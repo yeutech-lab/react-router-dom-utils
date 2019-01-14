@@ -27,6 +27,19 @@
           "name": "Configuration",
           "content": "docs/configuration.md",
           "components": "src/**/[A-z]*.js"
+        },
+        {
+          "name": "Utilities",
+          "sections": [
+            {
+              "name": "makeRoutes",
+              "content": "docs/js/makeRoutes.md"
+            },
+            {
+              "name": "getPages",
+              "content": "docs/js/getPages.md"
+            }
+          ]
         }
       ]
     },

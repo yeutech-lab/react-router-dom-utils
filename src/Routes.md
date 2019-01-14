@@ -1,5 +1,4 @@
-
-It expect an [`Array`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array) of `route` configuration. 
+It expect an [`Array`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array) of `route` configuration.
 
 See [`<Route />`](https://reacttraining.com/react-router/web/api/Route) documentation for more info.
 
@@ -62,10 +61,10 @@ const routes = [
 **Example**
 
 ```js
-const { 
-  Switch, 
-  BrowserRouter: Router, 
-  Link, 
+const {
+  Switch,
+  BrowserRouter: Router,
+  Link,
 } = require('react-router-dom');
 
 const routes = [
@@ -132,7 +131,7 @@ const routes = [
     path: '/404.html',
     component: () => <h1>404 Page not found</h1>,
   },
-]; 
+];
 
 const reference = {
   name: 'react-router-dom',
