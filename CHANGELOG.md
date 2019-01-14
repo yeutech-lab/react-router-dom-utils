@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.0.3...v1.1.0) (2019-01-14)
+
+
+### Features
+
+* **getPages:** added getPages ([4ca5007](https://github.com/yeutech-lab/react-router-dom-utils/commit/4ca5007))
+
 ## [1.0.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.0.2...v1.0.3) (2019-01-06)
 
 
