@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.1...v1.2.2) (2019-01-15)
+
+
+### Bug Fixes
+
+* **preload:** added preload props to tell if the preload should be totally disabled ([cb487bc](https://github.com/yeutech-lab/react-router-dom-utils/commit/cb487bc))
+
 ## [1.2.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.0...v1.2.1) (2019-01-15)
 
 
