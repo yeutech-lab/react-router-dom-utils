@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.1.0...v1.2.0) (2019-01-15)
+
+
+### Features
+
+* **Link:** Added <Link /> component ([1af95d2](https://github.com/yeutech-lab/react-router-dom-utils/commit/1af95d2))
+
 # [1.1.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.0.3...v1.1.0) (2019-01-14)
 
 
