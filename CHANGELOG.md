@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.3...v1.2.4) (2019-01-15)
+
+
+### Bug Fixes
+
+* **delay:** allow delay to be a function ([7693083](https://github.com/yeutech-lab/react-router-dom-utils/commit/7693083))
+
 ## [1.2.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.2...v1.2.3) (2019-01-15)
 
 
