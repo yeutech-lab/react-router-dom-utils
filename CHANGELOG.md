@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.0...v1.2.1) (2019-01-15)
+
+
+### Bug Fixes
+
+* **Link:** fixed componentWillMount throwing unwanted warning ([5b3d9f6](https://github.com/yeutech-lab/react-router-dom-utils/commit/5b3d9f6))
+
 # [1.2.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.1.0...v1.2.0) (2019-01-15)
 
 
