@@ -219,6 +219,7 @@
     "raf": "^3.4.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-styleguidist": "^8.0.6",
     "react-test-renderer": "^16.7.0",
@@ -359,10 +360,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 100,
-        "branches": 83,
-        "functions": 100,
-        "lines": 100
+        "statements": 97,
+        "branches": 100,
+        "functions": 91,
+        "lines": 93
       }
     },
     "moduleDirectories": [
