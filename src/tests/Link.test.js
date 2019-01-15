@@ -231,4 +231,14 @@ describe('<Link />', () => {
     );
     expect(renderedComponent.length).toBe(1);
   });
+  it('should throw warning due to both routes and ContextConsumer', () => {
+    const renderedComponent = mount(
+      <MemoryRouter initialEntries={['/']}>
+        <ContextProvider>
+          <Link to="/" routes={testRoutes} ContextConsumer={ContextConsumer} />
+        </ContextProvider>
+      </MemoryRouter>
+    );
+    expect(renderedComponent.length).toBe(1);
+  });
 });
