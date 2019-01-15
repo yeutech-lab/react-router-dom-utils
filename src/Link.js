@@ -41,6 +41,16 @@ class Link extends React.Component {
     to: PropTypes.string.isRequired,
     /** pass the component to be used for rendering */
     tag: PropTypes.any,
+    /**
+     * Avoiding Flash Of Loading Component
+     * Sometimes components load really quickly (<200ms) and the loading screen only quickly flashes on the screen.
+     * A number of user studies have proven that this causes users to perceive things taking longer than they really have.
+     * If you don't show anything, users perceive it as being faster.
+     * Useful if you use with waitChunk, To take over the delay of react-loadable
+     *
+     * See https://github.com/jamiebuilds/react-loadable#avoiding-flash-of-loading-component
+     */
+    delay: PropTypes.number,
     /** define if prel oading of chunks should happen */
     preload: PropTypes.bool,
     /** event when click */
@@ -72,6 +82,7 @@ class Link extends React.Component {
 
   static defaultProps = {
     tag: 'a',
+    delay: 0,
     waitChunk: false,
     preload: true,
     onClick: null,
@@ -130,11 +141,9 @@ class Link extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     const {
-      history,
       to,
       preload,
       onClick,
-      onPageChange,
       onPreload,
       onLoaded,
       waitChunk,
@@ -148,20 +157,25 @@ class Link extends React.Component {
         onPreload(e);
       }
       component.preload().then(() => {
-        if (onPageChange) {
-          onPageChange(e);
-        }
         if (onLoaded) {
           onLoaded(e);
         }
-        history.push(to);
+        this.changePage(e, to);
       });
       return;
     }
-    if (onPageChange) {
-      onPageChange(e);
-    }
-    history.push(to);
+    this.changePage(e, to);
+  };
+
+  changePage = (e, path) => {
+    const { history, delay, onPageChange } = this.props;
+    const timeout = delay === 0 ? (cb) => cb() : setTimeout;
+    timeout(() => {
+      if (onPageChange) {
+        onPageChange(e);
+      }
+      history.push(path);
+    }, delay);
   };
 
   render() {
