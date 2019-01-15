@@ -1,0 +1,185 @@
+[
+  {
+    "name": "home",
+    "message": {
+      "id": "www.yeutech.routes.home",
+      "defaultMessage": "Home"
+    },
+    "path": "/",
+    "exact": true
+  },
+  {
+    "name": "customers",
+    "message": {
+      "id": "www.yeutech.routes.customers",
+      "defaultMessage": "Customers"
+    },
+    "path": "/customers.html",
+    "exact": true,
+    "childRoutes": [
+      {
+        "name": "startup",
+        "message": {
+          "id": "www.yeutech.routes.startup",
+          "defaultMessage": "Startup"
+        },
+        "path": "/customers/startup.html",
+        "exact": true
+      },
+      {
+        "name": "smb",
+        "message": {
+          "id": "www.yeutech.routes.smbSme",
+          "defaultMessage": "SMB - SME"
+        },
+        "path": "/customers/smb-sme.html",
+        "exact": true
+      },
+      {
+        "name": "franchises",
+        "path": "/customers/franchises.html",
+        "exact": true
+      }
+    ],
+    "startup": {
+      "name": "startup",
+      "message": {
+        "id": "www.yeutech.routes.startup",
+        "defaultMessage": "Startup"
+      },
+      "path": "/customers/startup.html",
+      "exact": true
+    },
+    "smb": {
+      "name": "smb",
+      "message": {
+        "id": "www.yeutech.routes.smbSme",
+        "defaultMessage": "SMB - SME"
+      },
+      "path": "/customers/smb-sme.html",
+      "exact": true
+    },
+    "franchises": {
+      "name": "franchises",
+      "path": "/customers/franchises.html",
+      "exact": true
+    }
+  },
+  {
+    "name": "solutions",
+    "message": {
+      "id": "www.yeutech.routes.solutions",
+      "defaultMessage": "Solutions"
+    },
+    "path": "/solutions.html",
+    "exact": true
+  },
+  {
+    "name": "methodologies",
+    "message": {
+      "id": "www.yeutech.routes.methodologies",
+      "defaultMessage": "How we work"
+    },
+    "path": "/methodologies.html",
+    "exact": true
+  },
+  {
+    "name": "benefits",
+    "message": {
+      "id": "www.yeutech.routes.whyUs",
+      "defaultMessage": "Why us?"
+    },
+    "path": "/benefits.html",
+    "exact": true
+  },
+  {
+    "name": "contact",
+    "message": {
+      "id": "www.yeutech.routes.contact",
+      "defaultMessage": "Contact"
+    },
+    "path": "/contact.html",
+    "exact": true
+  },
+  {
+    "name": "choosePackage",
+    "message": {
+      "id": "www.yeutech.routes.choosePackage",
+      "defaultMessage": "Choose package"
+    },
+    "path": "/choose-package.html",
+    "exact": true
+  },
+  {
+    "name": "customize",
+    "message": {
+      "id": "www.yeutech.routes.customize",
+      "defaultMessage": "Customize"
+    },
+    "path": "/customize.html",
+    "exact": true
+  },
+  {
+    "name": "connectWithYeutech",
+    "message": {
+      "id": "www.yeutech.routes.connectWithYeutech",
+      "defaultMessage": "Connect with Yeutech"
+    },
+    "path": "/connect-with-yeutech.html",
+    "exact": true
+  },
+  {
+    "name": "aboutUs",
+    "message": {
+      "id": "www.yeutech.routes.aboutUs",
+      "defaultMessage": "About us"
+    },
+    "path": "/about-us.html",
+    "exact": true
+  },
+  {
+    "name": "career",
+    "message": {
+      "id": "www.yeutech.routes.career",
+      "defaultMessage": "Career"
+    },
+    "path": "/career.html",
+    "exact": true
+  },
+  {
+    "name": "faq",
+    "message": {
+      "id": "www.yeutech.routes.faq",
+      "defaultMessage": "FAQ"
+    },
+    "path": "/faq.html",
+    "exact": true
+  },
+  {
+    "name": "termsOfService",
+    "message": {
+      "id": "www.yeutech.routes.termsOfService",
+      "defaultMessage": "Terms of Service"
+    },
+    "path": "/terms-of-service.html",
+    "exact": true
+  },
+  {
+    "name": "confidentiality",
+    "message": {
+      "id": "www.yeutech.routes.confidentiality",
+      "defaultMessage": "Confidentiality"
+    },
+    "path": "/Confidentiality.html",
+    "exact": true
+  },
+  {
+    "name": "cookies",
+    "message": {
+      "id": "www.yeutech.routes.cookies",
+      "defaultMessage": "Cookies"
+    },
+    "path": "/cookies.html",
+    "exact": true
+  }
+]

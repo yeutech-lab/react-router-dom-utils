@@ -62,4 +62,12 @@ describe('makeRoutes', () => {
     expect(routeList.filter((r) => r.props.name === 'aboutUs')[0].props.path).toEqual('/about-us.html');
     expect(routeList.filter((r) => r.props.name === 'notFound')[0].props).toEqual({ name: 'notFound', path: '/404.html' });
   });
+  it('makeRoutes should return only one cipy per duplicate <Route />', () => {
+    const routeList = makeRoutes([{
+      name: 'same',
+    }, {
+      name: 'same',
+    }]);
+    expect(routeList.length).toBe(1);
+  });
 });
