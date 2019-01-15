@@ -47,10 +47,14 @@ class Link extends React.Component {
      * A number of user studies have proven that this causes users to perceive things taking longer than they really have.
      * If you don't show anything, users perceive it as being faster.
      * Useful if you use with waitChunk, To take over the delay of react-loadable
+     * When delay is a function, it's return must be the number value of the delay
      *
      * See https://github.com/jamiebuilds/react-loadable#avoiding-flash-of-loading-component
      */
-    delay: PropTypes.number,
+    delay: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.func,
+    ]),
     /** define if prel oading of chunks should happen */
     preload: PropTypes.bool,
     /** event when click */
@@ -170,12 +174,13 @@ class Link extends React.Component {
   changePage = (e, path) => {
     const { history, delay, onPageChange } = this.props;
     const timeout = delay === 0 ? (cb) => cb() : setTimeout;
+    const ms = typeof delay === 'function' ? delay() : delay;
     timeout(() => {
       if (onPageChange) {
         onPageChange(e);
       }
       history.push(path);
-    }, delay);
+    }, ms);
   };
 
   render() {
@@ -185,6 +190,7 @@ class Link extends React.Component {
       routes,
       ContextConsumer,
       // unused below
+      delay,
       preload,
       match,
       location,
