@@ -41,6 +41,8 @@ class Link extends React.Component {
     to: PropTypes.string.isRequired,
     /** pass the component to be used for rendering */
     tag: PropTypes.any,
+    /** define if prel oading of chunks should happen */
+    preload: PropTypes.bool,
     /** event when click */
     onClick: PropTypes.func,
     /** event when page has changed */
@@ -71,6 +73,7 @@ class Link extends React.Component {
   static defaultProps = {
     tag: 'a',
     waitChunk: false,
+    preload: true,
     onClick: null,
     onPageChange: null,
     onPreload: null,
@@ -104,13 +107,14 @@ class Link extends React.Component {
       onMouseOver,
       onPreload,
       onLoaded,
+      preload,
     } = this.props;
     const component = this.getComponent(to, routes);
 
     if (onMouseOver) {
       onMouseOver();
     }
-    if (component.preload) {
+    if (preload && component.preload) {
       if (onPreload) {
         onPreload(e);
       }
@@ -128,6 +132,7 @@ class Link extends React.Component {
     const {
       history,
       to,
+      preload,
       onClick,
       onPageChange,
       onPreload,
@@ -138,7 +143,7 @@ class Link extends React.Component {
     if (onClick) {
       onClick(e);
     }
-    if (waitChunk && component.preload) {
+    if (preload && waitChunk && component.preload) {
       if (onPreload) {
         onPreload(e);
       }
@@ -156,9 +161,6 @@ class Link extends React.Component {
     if (onPageChange) {
       onPageChange(e);
     }
-    if (onLoaded) {
-      onLoaded(e);
-    }
     history.push(to);
   };
 
@@ -169,6 +171,7 @@ class Link extends React.Component {
       routes,
       ContextConsumer,
       // unused below
+      preload,
       match,
       location,
       history,

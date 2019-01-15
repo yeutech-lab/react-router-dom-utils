@@ -167,8 +167,9 @@ describe('<Link />', () => {
   it('should onLoaded', () => {
     const spy = jest.fn();
     const renderedComponent = renderComponent({
+      waitChunk: true,
       routes: testRoutes,
-      to: '/404.html',
+      to: '/',
       onLoaded: spy,
     });
     renderedComponent.simulate('click');
@@ -240,5 +241,27 @@ describe('<Link />', () => {
       </MemoryRouter>
     );
     expect(renderedComponent.length).toBe(1);
+  });
+  it('should skip preload on mouse over and onClick', () => {
+    const onPreLoad = jest.fn();
+    const onLoaded = jest.fn();
+    const renderedComponent = mount(
+      <MemoryRouter initialEntries={['/']}>
+        <ContextProvider>
+          <Link
+            to="/"
+            routes={testRoutes}
+            ContextConsumer={ContextConsumer}
+            preload={false}
+            onPreload={onPreLoad}
+            onLoaded={onLoaded}
+          />
+        </ContextProvider>
+      </MemoryRouter>
+    );
+    renderedComponent.find('a').simulate('mouseover');
+    expect(onPreLoad).not.toHaveBeenCalled();
+    renderedComponent.find('a').simulate('click');
+    expect(onLoaded).not.toHaveBeenCalled();
   });
 });
