@@ -82,7 +82,7 @@ class Link extends React.Component {
 
   componentWillMount() {
     const { routes, ContextConsumer } = this.props;
-    if (routes && ContextConsumer && process.env.NODE_ENV !== 'production') {
+    if (routes.length && ContextConsumer && process.env.NODE_ENV !== 'production') {
       // eslint-disable-next-line no-console
       console.warn(
         'You passed routes and ContextConsumer props. You must use only one, ContextConsumer will be used and routes will be ignored.'
