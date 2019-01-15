@@ -289,4 +289,29 @@ describe('<Link />', () => {
       expect(onPageChange).toHaveBeenCalled();
     }, 250);
   }, 300);
+
+  it('should onClick with delay as a function', () => {
+    const onClick = jest.fn();
+    const onPageChange = jest.fn();
+    const renderedComponent = mount(
+      <MemoryRouter initialEntries={['/']}>
+        <ContextProvider>
+          <Link
+            to="/"
+            routes={testRoutes}
+            ContextConsumer={ContextConsumer}
+            preload
+            delay={() => 200}
+            onClick={onClick}
+            onPageChange={onPageChange}
+          />
+        </ContextProvider>
+      </MemoryRouter>
+    );
+    renderedComponent.find('a').simulate('click');
+    expect(onClick).toHaveBeenCalled();
+    setTimeout(() => {
+      expect(onPageChange).toHaveBeenCalled();
+    }, 250);
+  }, 300);
 });
