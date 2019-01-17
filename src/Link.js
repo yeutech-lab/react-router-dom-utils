@@ -67,6 +67,8 @@ class Link extends React.Component {
     onLoaded: PropTypes.func,
     /** event when mouse fly over */
     onMouseOver: PropTypes.func,
+    /** event fired just before the page change */
+    onBeforePageChange: PropTypes.func,
     /** define if react-router should change the page before or after the chunk is loaded */
     waitChunk: PropTypes.bool,
     /** the route list of the application, it supports childRoutes */
@@ -90,6 +92,7 @@ class Link extends React.Component {
     waitChunk: false,
     preload: true,
     onClick: null,
+    onBeforePageChange: null,
     onPageChange: null,
     onPreload: null,
     onLoaded: null,
@@ -172,9 +175,17 @@ class Link extends React.Component {
   };
 
   changePage = (e, path) => {
-    const { history, delay, onPageChange } = this.props;
+    const {
+      history,
+      delay,
+      onPageChange,
+      onBeforePageChange,
+    } = this.props;
     const timeout = delay === 0 ? (cb) => cb() : setTimeout;
     const ms = typeof delay === 'function' ? delay() : delay;
+    if (onBeforePageChange) {
+      onBeforePageChange(e);
+    }
     timeout(() => {
       if (onPageChange) {
         onPageChange(e);
@@ -202,6 +213,7 @@ class Link extends React.Component {
       onMouseOver,
       staticContext, // eslint-disable-line react/prop-types
       waitChunk,
+      onBeforePageChange,
       ...rest
     } = this.props;
     return ContextConsumer ? (

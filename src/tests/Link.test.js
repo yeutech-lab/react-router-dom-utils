@@ -164,6 +164,16 @@ describe('<Link />', () => {
     renderedComponent.simulate('click');
     expect(spy).toHaveBeenCalled();
   });
+  it('should onBeforePageChange', () => {
+    const spy = jest.fn();
+    const renderedComponent = renderComponent({
+      routes: testRoutes,
+      to: '/404.html',
+      onBeforePageChange: spy,
+    });
+    renderedComponent.simulate('click');
+    expect(spy).toHaveBeenCalled();
+  });
   it('should onLoaded', () => {
     const spy = jest.fn();
     const renderedComponent = renderComponent({
