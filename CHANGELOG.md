@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.3.0...v1.3.1) (2019-01-17)
+
+
+### Bug Fixes
+
+* **link:** remove useless ...rest spreaded twice on Link ([6dfd990](https://github.com/yeutech-lab/react-router-dom-utils/commit/6dfd990))
+
 # [1.3.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.4...v1.3.0) (2019-01-17)
 
 
