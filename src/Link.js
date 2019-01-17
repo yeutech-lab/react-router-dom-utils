@@ -220,7 +220,6 @@ class Link extends React.Component {
       <ContextConsumer>
         {({ routes: contextRoutes }) => (
           <Tag
-            {...rest}
             onClick={(e) => this.onClick(e, contextRoutes)}
             onFocus={(e) => this.onMouseOver(e, contextRoutes)}
             onMouseOver={(e) => this.onMouseOver(e, contextRoutes)}
@@ -231,7 +230,6 @@ class Link extends React.Component {
       </ContextConsumer>
     ) : (
       <Tag
-        {...rest}
         onClick={(e) => this.onClick(e, routes)}
         onFocus={(e) => this.onMouseOver(e, routes)}
         onMouseOver={(e) => this.onMouseOver(e, routes)}
