@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.4...v1.3.0) (2019-01-17)
+
+
+### Features
+
+* **Link:** added onBeforePageChange ([6ba166c](https://github.com/yeutech-lab/react-router-dom-utils/commit/6ba166c))
+
 ## [1.2.4](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.2.3...v1.2.4) (2019-01-15)
 
 
