@@ -112,9 +112,31 @@ class Link extends React.Component {
   }
 
   getComponent(path, routes) {
-    return makeRoutes(routes)
-      .filter((route) => route.props.path === path)[0]
-      .props.component;
+    const res = makeRoutes(routes)
+      .filter((route) => {
+        const dest = route.props.path;
+        if (!dest) {
+          return false;
+        }
+        if (dest === path) {
+          return true;
+        }
+        const p1 = dest.split('/');
+        const p2 = path.split('/');
+        const recomposedList = [];
+        for (let i = 0; i < p2.length; i += 1) {
+          if (p1[i] && p1[i].match(/:[A-z-0-9]+/)) {
+            recomposedList.push(p2[i]);
+          } else if (p1[i]) {
+            recomposedList.push(p1[i]);
+          }
+        }
+        return recomposedList.join('/') === path;
+      });
+    if (res.length) {
+      return res[0].props.component;
+    }
+    return null;
   }
 
   onMouseOver = (e, routes) => {
@@ -127,12 +149,13 @@ class Link extends React.Component {
       onLoaded,
       preload,
     } = this.props;
+
     const component = this.getComponent(to, routes);
 
     if (onMouseOver) {
       onMouseOver();
     }
-    if (preload && component.preload) {
+    if (preload && component && component.preload) {
       if (onPreload) {
         onPreload(e);
       }
