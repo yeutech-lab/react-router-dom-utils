@@ -93,6 +93,45 @@ describe('<Link />', () => {
     expect(renderedComponent.find('a').length).toBe(1);
     expect(renderedComponent.find('a').props().href).toBe('/404.html');
   });
+  it('should getComponent with params and found the component', () => {
+    const renderedComponent = renderComponent({
+      routes: [
+        {
+          path: '/users/:id/service/:name',
+          component: 'Found',
+        },
+      ],
+      to: '/users/4564/service/this-is_cool',
+    });
+    const link = renderedComponent.find('Link');
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe('Found');
+  });
+  it('should fail to getComponent', () => {
+    const renderedComponent = renderComponent({
+      routes: [
+        {
+          path: '/users/:id/service/:name',
+          component: 'Found',
+        },
+      ],
+      to: 'users/4564/service/this-is_cool',
+    });
+    const link = renderedComponent.find('Link');
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(null);
+  });
+  it('should also fail to getComponent', () => {
+    const renderedComponent = renderComponent({
+      routes: [
+        {
+          path: 'users/:id/service/:name',
+          component: 'Found',
+        },
+      ],
+      to: '/users/4564/service/this-is_cool',
+    });
+    const link = renderedComponent.find('Link');
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(null);
+  });
   it('should onMouseOver', () => {
     const spy = jest.fn();
     const renderedComponent = renderComponent({

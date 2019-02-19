@@ -37,9 +37,9 @@ import makeRoutes from './makeRoutes';
  */
 class Link extends React.Component {
   static propTypes = {
-    /** the path the link will go to */
+    /** The path the link will go to */
     to: PropTypes.string.isRequired,
-    /** pass the component to be used for rendering */
+    /** Pass the component to be used for rendering */
     tag: PropTypes.any,
     /**
      * Avoiding Flash Of Loading Component
@@ -55,23 +55,26 @@ class Link extends React.Component {
       PropTypes.number,
       PropTypes.func,
     ]),
-    /** define if prel oading of chunks should happen */
+    /** Define if prel oading of chunks should happen */
     preload: PropTypes.bool,
-    /** event when click */
+    /** Event when click */
     onClick: PropTypes.func,
-    /** event when page has changed */
+    /** Event when page has changed */
     onPageChange: PropTypes.func,
-    /** event when preloading start (react-loadable) */
+    /** Event when preloading start (react-loadable) */
     onPreload: PropTypes.func,
-    /** event when preloading stop  (react-loadable) */
+    /** Event when preloading stop  (react-loadable) */
     onLoaded: PropTypes.func,
-    /** event when mouse fly over */
+    /** Event when mouse fly over */
     onMouseOver: PropTypes.func,
-    /** event fired just before the page change */
+    /** Event fired just before the page change */
     onBeforePageChange: PropTypes.func,
-    /** define if react-router should change the page before or after the chunk is loaded */
+    /** Define if react-router should change the page before or after the chunk is loaded */
     waitChunk: PropTypes.bool,
-    /** the route list of the application, it supports childRoutes */
+    /**
+     * The route configuration of the application, it supports childRoutes.
+     * To work with react-loadable, a route must contain a key named component that is the react-loadable component
+     */
     routes: PropTypes.array,
     /**
      * A context consumer that will provide routes from it's context,
@@ -112,6 +115,7 @@ class Link extends React.Component {
   }
 
   getComponent(path, routes) {
+    let component = null;
     const res = makeRoutes(routes)
       .filter((route) => {
         const dest = route.props.path;
@@ -122,21 +126,22 @@ class Link extends React.Component {
           return true;
         }
         const p1 = dest.split('/');
+        const leading = dest[0] === '/' ? '/' : '';
         const p2 = path.split('/');
         const recomposedList = [];
         for (let i = 0; i < p2.length; i += 1) {
-          if (p1[i] && p1[i].match(/:[A-z-0-9]+/)) {
+          if (p1[i] && p1[i].match(/:[A-z-0-9_]+/)) {
             recomposedList.push(p2[i]);
           } else if (p1[i]) {
             recomposedList.push(p1[i]);
           }
         }
-        return recomposedList.join('/') === path;
+        return `${leading}${recomposedList.join('/')}` === path;
       });
     if (res.length) {
-      return res[0].props.component;
+      component = res[0].props.component; // eslint-disable-line prefer-destructuring
     }
-    return null;
+    return component;
   }
 
   onMouseOver = (e, routes) => {
