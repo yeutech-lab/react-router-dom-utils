@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.3.2...v1.3.3) (2019-02-19)
+
+
+### Bug Fixes
+
+* **Link:** improve the hability of Link to detect component with route using params ([04b9458](https://github.com/yeutech-lab/react-router-dom-utils/commit/04b9458))
+
 ## [1.3.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.3.1...v1.3.2) (2019-02-19)
 
 
