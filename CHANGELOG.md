@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.3.1...v1.3.2) (2019-02-19)
+
+
+### Bug Fixes
+
+* **Link:** improve link to support dynamic url and failure ([d8f67db](https://github.com/yeutech-lab/react-router-dom-utils/commit/d8f67db))
+
 ## [1.3.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.3.0...v1.3.1) (2019-01-17)
 
 
