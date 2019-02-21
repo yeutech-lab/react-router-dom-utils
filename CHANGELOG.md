@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.3.3...v1.4.0) (2019-02-21)
+
+
+### Bug Fixes
+
+* **Link:** fix example and added isPathParamsPath to documentation ([b749db7](https://github.com/yeutech-lab/react-router-dom-utils/commit/b749db7))
+
+
+### Features
+
+* **isPathParamsPath:** added an utility function to compare path and path with params ([08d2669](https://github.com/yeutech-lab/react-router-dom-utils/commit/08d2669))
+
 ## [1.3.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.3.2...v1.3.3) (2019-02-19)
 
 
