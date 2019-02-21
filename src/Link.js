@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withRouter from 'react-router-dom/withRouter';
 import makeRoutes from './makeRoutes';
+import isPathParamsPath from './isPathParamsPath';
 
 /**
  * @name Link
@@ -125,21 +126,15 @@ class Link extends React.Component {
         if (dest === path) {
           return true;
         }
-        const p1 = dest.split('/');
-        const leading = dest[0] === '/' ? '/' : '';
-        const p2 = path.split('/');
-        const recomposedList = [];
-        for (let i = 0; i < p2.length; i += 1) {
-          if (p1[i] && p1[i].match(/:[A-z-0-9_]+/)) {
-            recomposedList.push(p2[i]);
-          } else if (p1[i]) {
-            recomposedList.push(p1[i]);
-          }
-        }
-        return `${leading}${recomposedList.join('/')}` === path;
+        return isPathParamsPath(path, dest);
       });
     if (res.length) {
-      component = res[0].props.component; // eslint-disable-line prefer-destructuring
+      for (let i = 0; i < res.length; i += 1) {
+        if (res[i].props.component) {
+          component = res[i].props.component; // eslint-disable-line prefer-destructuring
+          break;
+        }
+      }
     }
     return component;
   }
