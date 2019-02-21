@@ -16,7 +16,7 @@ import isPathParamsPath from './isPathParamsPath';
  *
  * Usually, you would create a `<Link />` component in your application `src/components/Link/index.js` as follow:
  *
- * ```javascript
+ * ```jsx
  * export default (
  *   <Link
  *    tag={A}

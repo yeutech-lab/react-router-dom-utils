@@ -38,6 +38,10 @@
             {
               "name": "getPages",
               "content": "docs/js/getPages.md"
+            },
+            {
+              "name": "isPathParamsPath",
+              "content": "docs/js/isPathParamsPath.md"
             }
           ]
         }
