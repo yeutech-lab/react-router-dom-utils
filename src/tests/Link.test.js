@@ -98,20 +98,20 @@ describe('<Link />', () => {
       routes: [
         {
           path: '/users/:id/service/:name',
-          component: 'Found',
+          component: <div>Found</div>,
         },
       ],
       to: '/users/4564/service/this-is_cool',
     });
     const link = renderedComponent.find('Link');
-    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe('Found');
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toEqual(<div>Found</div>);
   });
   it('should fail to getComponent', () => {
     const renderedComponent = renderComponent({
       routes: [
         {
           path: '/users/:id/service/:name',
-          component: 'Found',
+          component: <div>Found</div>,
         },
       ],
       to: 'users/4564/service/this-is_cool',
