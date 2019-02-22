@@ -4,6 +4,13 @@ import React from 'react';
 /**
  * @public
  * @description This utility will check for routes configurations
+ *
+ * ```js
+ * const { makeRoutes } = require('$PACKAGE_NAME/lib');
+ * const Routes = makeRoutes([{ name: 'home', path: '/home', component: () => <div>Home page</div> }]);
+ * <div>{Routes[0].props.name} is <code>home</code></div>;
+ * ```
+ *
  * @param {Array} routesConfig - list of route configuration
  * @returns {Array} routeList - list of <Route /> and <Redirect />
  * @example

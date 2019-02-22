@@ -6,6 +6,34 @@ Looping through an array and find an entry require filtering. Find recursively a
 
 it turn your array of `routes` into a `pages` object that can be used to access any `path`.
 
+```js
+const getPages = require('$PACKAGE_NAME/lib/getPages');
+const routes = [{
+  name: 'dashboard',
+  redirect: true,
+  from: '/dashboard',
+  to: '/',
+  description: 'Dashboard',
+  childRoutes: [
+    {
+      name: 'users',
+      path: '/users',
+      description: 'List users',
+    },
+  ],
+}];
+<div>
+  <h2>routes:</h2>
+  <pre>
+    {JSON.stringify(routes, null, 2)}
+  </pre>
+  <h2>pages:</h2>
+  <pre>
+    {JSON.stringify(getPages(routes), null, 2)}
+  </pre>
+</div>
+```
+
 ### Parameters
 
 -   `routeConfig` **[Array][1]** a list of route configuration
