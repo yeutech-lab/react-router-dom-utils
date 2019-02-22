@@ -4,6 +4,11 @@
 
 It will return true if the first path match the second path with params
 
+```js
+const { isPathParamsPath } = require('$PACKAGE_NAME/lib');
+<div>isPathParamsPath('/users/1', '/users/:id'): {isPathParamsPath('/users/1', '/users/:id').toString()}</div>;
+```
+
 ### Parameters
 
 -   `path` **[string][1]** The real path
