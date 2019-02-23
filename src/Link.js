@@ -23,7 +23,9 @@ import matchParamsPath from './matchParamsPath';
  *    waitChunk={true}
  *    // You can pass routes as props
  *    routes={[{ name: 'Home', component: Home, path: '/' }]}
- *    // OR a ContextConsumer that own it
+ *    // Or/With a routes map
+ *    routesMap={getRoutesMap([{ name: 'Home', component: Home, path: '/' }])}
+ *    // ContextConsumer will override routes and routesMap and get them directly from the ContextConsumer
  *    ContextConsumer={AppContextConsumer}
  *    onClick={actionStartLoadingIndicator}
  *    onPreload={() => console.log(`
@@ -56,7 +58,7 @@ class Link extends React.Component {
       PropTypes.number,
       PropTypes.func,
     ]),
-    /** Define if prel oading of chunks should happen */
+    /** Define if preloading of chunks should happen */
     preload: PropTypes.bool,
     /** Event when click */
     onClick: PropTypes.func,
@@ -70,16 +72,30 @@ class Link extends React.Component {
     onMouseOver: PropTypes.func,
     /** Event fired just before the page change */
     onBeforePageChange: PropTypes.func,
-    /** Define if react-router should change the page before or after the chunk is loaded */
+    /**
+     * Define if react-router should change the page before or after the chunk is loaded
+     * When waitChunk is true, it will call the preload of the loadable component before triggering the page change
+     * If waitChink is false, it will trigger the page change as soon as possible.
+     * This behavior is disabled by default, but is required if you expect to start an animation before freezing the animation for the page change
+     */
     waitChunk: PropTypes.bool,
     /**
-     * The route configuration of the application, it supports routes.
-     * To work with react-loadable, a route must contain a key named component that is the react-loadable component
+     * The array of routes configuration of the application.
+     * It can be used internally to retrieve the Loadable component.
+     * It will be used as a fallback if props.routesMaps does not contains any loadable component.
      */
     routes: PropTypes.array,
     /**
-     * A context consumer that will provide routes from it's context,
-     * It also supports routes.
+     * The routesMap
+     * It can be used internally to retrieve the Loadable component.
+     * props.routes when defined will be used as a fallback when no component is found using the routesMap.
+     */
+    routesMap: PropTypes.instanceOf(Map),
+    /**
+     * A context consumer that can override props.routes and props.routesMap props
+     * The ContextConsumer must consume at least routes or routesMap,
+     * If both are in the context, it will first check within routesMap and if it doesn't find it,
+     * It will check for the routes to find the Loadable component
      */
     ContextConsumer: PropTypes.any,
     /** @ignore */
@@ -102,44 +118,66 @@ class Link extends React.Component {
     onLoaded: null,
     onMouseOver: null,
     routes: [],
+    routesMap: new Map(),
     ContextConsumer: null,
   };
 
   componentWillMount() {
-    const { routes, ContextConsumer } = this.props;
-    if (routes.length && ContextConsumer && process.env.NODE_ENV !== 'production') {
+    const { routes, routesMap, ContextConsumer } = this.props;
+    if ((routes.length || routesMap.size) && ContextConsumer && process.env.NODE_ENV !== 'production') {
       // eslint-disable-next-line no-console
       console.warn(
-        'You passed routes and ContextConsumer props. You must use only one, ContextConsumer will be used and routes will be ignored.'
+        'You passed routes and/or routesMap and ContextConsumer props. It will skip routes and routesMap and use the ContextConsumer to retrieve them from the context.'
       );
     }
   }
 
-  getComponent(path, routes) {
+  /**
+   * @private
+   * @description
+   * This function will look through a list of routes configuration object and a routes Map to try to retrieve
+   * a component that may be attached to the root.
+   * It will look first using the map, and if not found, using the routes
+   * @param path
+   * @param routes
+   * @param routesMap
+   * @return {component} - React component attached to the routes
+   */
+  getComponent(path, routes = [], routesMap = new Map()) {
     let component = null;
-    const res = makeRoutes(routes)
-      .filter((route) => {
-        const dest = route.props.path;
-        if (!dest) {
-          return false;
-        }
-        if (dest === path) {
-          return true;
-        }
-        return matchParamsPath(path, dest);
-      });
-    if (res.length) {
-      for (let i = 0; i < res.length; i += 1) {
-        if (res[i].props.component) {
-          component = res[i].props.component; // eslint-disable-line prefer-destructuring
-          break;
+    const list = [Array.from((routesMap).values()), routes];
+    for (let i = 0; i < list.length; i += 1) {
+      if (list[i].length) {
+        const res = makeRoutes(list[i])
+          .filter((route) => {
+            const dest = route.props.path;
+            if (!dest) {
+              return false;
+            }
+            if (dest === path) {
+              return true;
+            }
+            return matchParamsPath(path, dest);
+          });
+        if (res.length) {
+          let exitLoop = false;
+          for (let j = 0; j < res.length; j += 1) {
+            if (res[j].props.component) {
+              component = res[j].props.component; // eslint-disable-line prefer-destructuring
+              exitLoop = true;
+              break;
+            }
+          }
+          if (exitLoop) {
+            break;
+          }
         }
       }
     }
     return component;
   }
 
-  onMouseOver = (e, routes) => {
+  onMouseOver = (e, routes, routesMap) => {
     e.preventDefault();
     e.stopPropagation();
     const {
@@ -150,7 +188,7 @@ class Link extends React.Component {
       preload,
     } = this.props;
 
-    const component = this.getComponent(to, routes);
+    const component = this.getComponent(to, routes, routesMap);
 
     if (onMouseOver) {
       onMouseOver();
@@ -167,7 +205,7 @@ class Link extends React.Component {
     }
   };
 
-  onClick = (e, routes) => {
+  onClick = (e, routes, routesMap) => {
     e.preventDefault();
     e.stopPropagation();
     const {
@@ -178,7 +216,7 @@ class Link extends React.Component {
       onLoaded,
       waitChunk,
     } = this.props;
-    const component = this.getComponent(to, routes);
+    const component = this.getComponent(to, routes, routesMap);
     if (onClick) {
       onClick(e);
     }
@@ -222,6 +260,7 @@ class Link extends React.Component {
       tag: Tag,
       to,
       routes,
+      routesMap,
       ContextConsumer,
       // unused below
       delay,
@@ -241,11 +280,11 @@ class Link extends React.Component {
     } = this.props;
     return ContextConsumer ? (
       <ContextConsumer>
-        {({ routes: contextRoutes }) => (
+        {({ routes: contextRoutes, routesMap: contextRoutesMap }) => (
           <Tag
-            onClick={(e) => this.onClick(e, contextRoutes)}
-            onFocus={(e) => this.onMouseOver(e, contextRoutes)}
-            onMouseOver={(e) => this.onMouseOver(e, contextRoutes)}
+            onClick={(e) => this.onClick(e, contextRoutes, contextRoutesMap)}
+            onFocus={(e) => this.onMouseOver(e, contextRoutes, contextRoutesMap)}
+            onMouseOver={(e) => this.onMouseOver(e, contextRoutes, contextRoutesMap)}
             href={to}
             {...rest}
           />
@@ -253,9 +292,9 @@ class Link extends React.Component {
       </ContextConsumer>
     ) : (
       <Tag
-        onClick={(e) => this.onClick(e, routes)}
-        onFocus={(e) => this.onMouseOver(e, routes)}
-        onMouseOver={(e) => this.onMouseOver(e, routes)}
+        onClick={(e) => this.onClick(e, routes, routesMap)}
+        onFocus={(e) => this.onMouseOver(e, routes, routesMap)}
+        onMouseOver={(e) => this.onMouseOver(e, routes, routesMap)}
         href={to}
         {...rest}
       />
