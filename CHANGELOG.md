@@ -1,3 +1,11 @@
+## [2.0.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.0.2...v2.0.3) (2019-02-23)
+
+
+### Bug Fixes
+
+* **getRoutesMap:** Added polyfill ([05c6c6b](https://github.com/yeutech-lab/react-router-dom-utils/commit/05c6c6b))
+* **getRoutesMap:** Added polyfill ([330158d](https://github.com/yeutech-lab/react-router-dom-utils/commit/330158d))
+
 ## [2.0.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.0.1...v2.0.2) (2019-02-23)
 
 
