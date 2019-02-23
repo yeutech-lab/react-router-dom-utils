@@ -4,7 +4,8 @@
     "react-dom": "ReactDom",
     "react-router-dom": "react-router-dom",
     "deepmerge": "merge",
-    "@yeutech-lab/tree-operations": "TreeOps"
+    "@yeutech-lab/tree-operations": "TreeOps",
+    "core-js": "CoreJs"
   },
   "external": [
     "react",
@@ -12,5 +13,6 @@
     "react-router-dom",
     "deepmerge",
     "@yeutech-lab/tree-operations"
+    "core-js"
   ]
 }
