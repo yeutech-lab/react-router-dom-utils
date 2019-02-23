@@ -1,3 +1,15 @@
+# [2.1.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.0.3...v2.1.0) (2019-02-23)
+
+
+### Bug Fixes
+
+* **dependencies:** remove babel-core@7.0.0-bridge.0 ([328027b](https://github.com/yeutech-lab/react-router-dom-utils/commit/328027b))
+
+
+### Features
+
+* **Link:** Link now support routesMap in prior routes for finding the Loadable component ([88a1671](https://github.com/yeutech-lab/react-router-dom-utils/commit/88a1671))
+
 ## [2.0.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.0.2...v2.0.3) (2019-02-23)
 
 
