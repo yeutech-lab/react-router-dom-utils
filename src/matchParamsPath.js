@@ -4,20 +4,20 @@
  * It will return true if the first path match the second path with params
  *
  * ```js
- * const { isPathParamsPath } = require('$PACKAGE_NAME/lib');
- * <div>isPathParamsPath('/users/1', '/users/:id'): {isPathParamsPath('/users/1', '/users/:id').toString()}</div>;
+ * const { matchParamsPath } = require('$PACKAGE_NAME/lib');
+ * <div>matchParamsPath('/users/1', '/users/:id'): {matchParamsPath('/users/1', '/users/:id').toString()}</div>;
  * ```
  *
  * @param {string} path - The real path
  * @param {string} pathWithParams - The path with params
  * @return {boolean} - Return true if the compare match
  * @example
- * isPathParamsPath('/users/1', '/users/:id');
+ * matchParamsPath('/users/1', '/users/:id');
  * // true
- * isPathParamsPath('/users', '/users/:id');
+ * matchParamsPath('/users', '/users/:id');
  * // false
  */
-export default function isPathParamsPath(path, pathWithParams) {
+export default function matchParamsPath(path, pathWithParams) {
   const p1 = pathWithParams.split('/');
   const p2 = path.split('/');
   if (p1.length !== p2.length) {

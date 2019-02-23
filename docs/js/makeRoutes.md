@@ -12,7 +12,8 @@ const Routes = makeRoutes([{ name: 'home', path: '/home', component: () => <div>
 
 ### Parameters
 
--   `routesConfig` **[Array][1]** list of route configuration
+-   `routesConfig` **([Array][1] \| [Map][2]&lt;[string][3], [object][4]>)** |routesMap - list of route configuration
+-   `childKey` **[string][3]** the children key used for flattening pages (optional, default `routes`)
 
 ### Examples
 
@@ -24,3 +25,9 @@ const routeList = makeRoutes([{ name: 'home', path: '/home', component: HomePage
 Returns **[Array][1]** routeList - list of <Route /> and <Redirect />
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map
+
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object

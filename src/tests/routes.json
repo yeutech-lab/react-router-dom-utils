@@ -16,7 +16,7 @@
     },
     "path": "/customers.html",
     "exact": true,
-    "childRoutes": [
+    "routes": [
       {
         "name": "startup",
         "message": {

@@ -5,10 +5,10 @@ describe('should exports', () => {
     const routes = [{
       name: 'hello',
       path: '/hello',
-      childRoutes: [{
+      routes: [{
         name: 'world',
         path: '/hello/world',
-        childRoutes: [{
+        routes: [{
           name: '2017',
           path: '/hello/world/2017',
         }],
@@ -16,13 +16,13 @@ describe('should exports', () => {
     }, {
       name: 'bye',
       path: '/bye',
-      childRoutes: [{
+      routes: [{
         name: 'forest',
         path: '/bye/forest',
-        childRoutes: [{
+        routes: [{
           name: 'gump',
           path: '/bye/forest/gump',
-          childRoutes: [{
+          routes: [{
             name: '1337',
             path: '/bye/forest/gump/1337',
           }],
@@ -32,12 +32,12 @@ describe('should exports', () => {
     const routesCopy = [...routes];
     expect(getPages(routes)).toEqual({
       bye: {
-        childRoutes: [{
-          childRoutes: [{
+        routes: [{
+          routes: [{
             1337: {
               name: '1337', path: '/bye/forest/gump/1337',
             },
-            childRoutes: [{
+            routes: [{
               name: '1337', path: '/bye/forest/gump/1337',
             }],
             name: 'gump',
@@ -47,7 +47,7 @@ describe('should exports', () => {
             1337: {
               name: '1337', path: '/bye/forest/gump/1337',
             },
-            childRoutes: [{
+            routes: [{
               name: '1337', path: '/bye/forest/gump/1337',
             }],
             name: 'gump',
@@ -57,11 +57,11 @@ describe('should exports', () => {
           path: '/bye/forest',
         }],
         forest: {
-          childRoutes: [{
+          routes: [{
             1337: {
               name: '1337', path: '/bye/forest/gump/1337',
             },
-            childRoutes: [{
+            routes: [{
               name: '1337', path: '/bye/forest/gump/1337',
             }],
             name: 'gump',
@@ -71,7 +71,7 @@ describe('should exports', () => {
             1337: {
               name: '1337', path: '/bye/forest/gump/1337',
             },
-            childRoutes: [{
+            routes: [{
               name: '1337', path: '/bye/forest/gump/1337',
             }],
             name: 'gump',
@@ -84,11 +84,11 @@ describe('should exports', () => {
         path: '/bye',
       },
       hello: {
-        childRoutes: [{
+        routes: [{
           2017: {
             name: '2017', path: '/hello/world/2017',
           },
-          childRoutes: [{
+          routes: [{
             name: '2017', path: '/hello/world/2017',
           }],
           name: 'world',
@@ -100,7 +100,7 @@ describe('should exports', () => {
           2017: {
             name: '2017', path: '/hello/world/2017',
           },
-          childRoutes: [{
+          routes: [{
             name: '2017', path: '/hello/world/2017',
           }],
           name: 'world',

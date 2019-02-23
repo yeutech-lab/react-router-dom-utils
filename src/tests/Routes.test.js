@@ -12,7 +12,7 @@ const testRoutes = [
     name: 'customers',
     path: '/customers.html',
     exact: true,
-    childRoutes: [
+    routes: [
       {
         name: 'aboutUs',
         path: '/about-us.html',

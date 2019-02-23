@@ -3,7 +3,7 @@
  * @name getPages
  * @description
  *
- * Looping through an array and find an entry require filtering. Find recursively a (`childRoutes`) won't look nice in your code.
+ * Looping through an array and find an entry require filtering. Find recursively a (`routes`) won't look nice in your code.
  *
  * it turn your array of `routes` into a `pages` object that can be used to access any `path`.
  *
@@ -15,7 +15,7 @@
  *   from: '/dashboard',
  *   to: '/',
  *   description: 'Dashboard',
- *   childRoutes: [
+ *   routes: [
  *     {
  *       name: 'users',
  *       path: '/users',
@@ -36,10 +36,11 @@
  * ```
  *
  * @param {Array} routeConfig - a list of route configuration
- * @param {object} [default={}] pages - an object pages to expand
+ * @param {object} [pages={}] - an object pages to expand
+ * @param {string} [childKey=routes] - the children key used for flattening pages
  * @return {object} pages - a pages object
  * @example
- * `childRoutes` are flattened in parent `[parent][route.name]` and are kept in `[parent].childRoutes` for faster accessibility.
+ * `routes` are flattened in parent `[parent][route.name]` and are kept in `[parent].routes` for faster accessibility.
  *
  * // This is how you would access a specific page in your routes configuration array:
  *
@@ -50,7 +51,7 @@
  *     from: '/dashboard',
  *     to: '/',
  *     description: 'Dashboard',
- *     childRoutes: [
+ *     routes: [
  *       {
  *         name: 'users',
  *         path: '/users',
@@ -71,7 +72,7 @@
  *     from: '/dashboard',
  *     to: '/',
  *     description: 'Dashboard',
- *     childRoutes: [
+ *     routes: [
  *       {
  *         name: 'users',
  *         path: '/users',
@@ -88,13 +89,13 @@
  *
  *
  */
-export default function getPages(routeConfig, pages = {}) {
+export default function getPages(routeConfig, pages = {}, childKey = 'routes') {
   const copy = [...routeConfig];
   function addRoutes(routes, parent) {
     const innerCopy = [...routes];
     innerCopy.forEach((route) => {
       parent[route.name] = route; // eslint-disable-line no-param-reassign
-      route.childRoutes && addRoutes(route.childRoutes, route); // eslint-disable-line no-unused-expressions
+      route[childKey] && addRoutes(route[childKey], route); // eslint-disable-line no-unused-expressions
     });
   }
   addRoutes(copy, pages);
