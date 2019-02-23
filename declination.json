@@ -12,7 +12,7 @@
     "react-dom",
     "react-router-dom",
     "deepmerge",
-    "@yeutech-lab/tree-operations"
+    "@yeutech-lab/tree-operations",
     "core-js"
   ]
 }
