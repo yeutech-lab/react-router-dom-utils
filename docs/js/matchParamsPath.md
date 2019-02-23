@@ -25,11 +25,6 @@ matchParamsPath('/users', '/users/:id');
 
 Returns **[boolean][2]** Return true if the compare match
 
-**Meta**
-
--   **deprecated**: This is deprecated.
-
-
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import makeRoutes from './makeRoutes';
 
 /**
- * @description Routes component
- * @param {object} props -  props with props.routes a routes configuration array
- * @returns {Routes}
+ * @description
+ * Generate all Routes components for your application, it can be used within a Switch.
+ * @param {object|Map<string, object>} props -  props with props.routes an array of routes configuration or a routes map
+ * @returns {Route[]}
  * @constructor
  */
 const Routes = ({ routes }) => <Fragment>{makeRoutes(routes)}</Fragment>;

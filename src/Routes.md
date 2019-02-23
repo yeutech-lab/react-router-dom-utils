@@ -13,7 +13,7 @@ const routes = [
     name: 'customers',
     path: '/customers.html',
     exact: true,
-    childRoutes: [
+    routes: [
       {
         name: 'aboutUs',
         path: '/about-us.html',
@@ -79,13 +79,13 @@ const routes = [
     path: '/customers.html',
     exact: true,
     component: () => <div>home</div>,
-    childRoutes: [
+    routes: [
       {
         name: 'aboutUs',
         path: '/about-us.html',
         exact: true,
         component: () => <div>home</div>,
-        childRoutes: [
+        routes: [
           {
             name: 'theVision',
             path: '/about-us/the-vision.html',
@@ -145,7 +145,7 @@ const createNavigation = (routes, padding = 0) => (
       <li key={route.name}>
         <Link to={route.path} onClick={(e) => e.preventDefault() || e.stopPropagation() || alert(route.path)}>
           {route.name}
-          {route.childRoutes && createNavigation(route.childRoutes, 15)}
+          {route.routes && createNavigation(route.routes, 15)}
         </Link>
       </li>
     ))}

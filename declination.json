@@ -2,11 +2,15 @@
   "globals": {
     "react": "React",
     "react-dom": "ReactDom",
-    "react-router-dom": "react-router-dom"
+    "react-router-dom": "react-router-dom",
+    "deepmerge": "merge",
+    "tree-operations": "TreeOps"
   },
   "external": [
     "react",
     "react-dom",
-    "react-router-dom"
+    "react-router-dom",
+    "deepmerge",
+    "tree-operations"
   ]
 }

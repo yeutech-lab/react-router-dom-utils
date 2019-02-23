@@ -11,28 +11,68 @@ import React from 'react';
  * <div>{Routes[0].props.name} is <code>home</code></div>;
  * ```
  *
- * @param {Array} routesConfig - list of route configuration
+ * @param {Array|Map<string,object>} routesConfig|routesMap - list of route configuration
+ * @param {string} [childKey=routes] - the children key used for flattening pages
  * @returns {Array} routeList - list of <Route /> and <Redirect />
  * @example
  * const routeList = makeRoutes([{ name: 'home', path: '/home', component: HomePage }])
  * // return [<Route name="home" path="/home" component={HomePage} />]
  */
-export default function makeRoutes(routesConfig) {
+export default function makeRoutes(routesConfig, childKey = 'routes') {
   const routeList = [];
   function recursive(routes) {
     routes.forEach((route) => {
-      if (routeList.filter((l) => l.key === route.name).length === 0) {
+      const path = route.path || route.from;
+      if (!routeList.find((l) => l.key === path)) {
         if (route.from) {
-          routeList.push(<Redirect key={route.name} {...route} />);
+          const {
+            to,
+            push,
+            from,
+            exact,
+            strict,
+          } = route;
+          routeList.push(
+            <Redirect
+              key={from}
+              to={to}
+              push={push}
+              from={from}
+              exact={exact}
+              strict={strict}
+            />
+          );
         } else {
-          routeList.push(<Route key={route.name} {...route} />);
+          const {
+            render,
+            children,
+            path: routePath,
+            exact,
+            strict,
+            location,
+            sensitive,
+            component,
+          } = route;
+          routeList.push(
+            <Route
+              key={path}
+              render={render}
+              children={children} // eslint-disable-line react/no-children-prop
+              path={routePath}
+              exact={exact}
+              strict={strict}
+              location={location}
+              sensitive={sensitive}
+              component={component}
+            />
+          );
         }
-        if (route.childRoutes) {
-          recursive(route.childRoutes);
+        if (route[childKey]) {
+          recursive(route[childKey]);
         }
       }
     });
   }
-  recursive(routesConfig);
+  recursive(routesConfig instanceof Map ? [...routesConfig.values()] : routesConfig);
   return routeList;
 }

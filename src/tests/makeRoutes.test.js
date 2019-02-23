@@ -1,4 +1,5 @@
 import makeRoutes from '../makeRoutes';
+import getRoutesMap from '../getRoutesMap';
 
 const testRoutes = [
   {
@@ -10,7 +11,7 @@ const testRoutes = [
     name: 'customers',
     path: '/customers.html',
     exact: true,
-    childRoutes: [
+    routes: [
       {
         name: 'aboutUs',
         path: '/about-us.html',
@@ -59,15 +60,23 @@ describe('makeRoutes', () => {
   it('makeRoutes should return a list of <Route />', () => {
     const routeList = makeRoutes(testRoutes);
     expect(routeList.length).toBe(10);
-    expect(routeList.filter((r) => r.props.name === 'aboutUs')[0].props.path).toEqual('/about-us.html');
-    expect(routeList.filter((r) => r.props.name === 'notFound')[0].props).toEqual({ name: 'notFound', path: '/404.html' });
+    expect(routeList.find((r) => r.props.path === '/about-us.html').props.path).toEqual('/about-us.html');
+    const routeProps = routeList.find((r) => r.props.path === '/404.html').props;
+    expect(routeProps.path).toEqual('/404.html');
   });
-  it('makeRoutes should return only one cipy per duplicate <Route />', () => {
+  it('makeRoutes should return only one copy per duplicate <Route />', () => {
     const routeList = makeRoutes([{
-      name: 'same',
+      path: '/same',
     }, {
-      name: 'same',
+      path: '/same',
     }]);
     expect(routeList.length).toBe(1);
+  });
+  it('makeRoutes should work with Map', () => {
+    const routeList = makeRoutes(getRoutesMap(testRoutes));
+    expect(routeList.length).toBe(10);
+    expect(routeList.find((r) => r.props.path === '/about-us.html').props.path).toEqual('/about-us.html');
+    const routeProps = routeList.find((r) => r.props.path === '/404.html').props;
+    expect(routeProps.path).toEqual('/404.html');
   });
 });

@@ -192,7 +192,7 @@
     "@yeutech-lab/documentation": "^1.0.12",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "babel-merge": "^2.0.1",
     "babel-plugin-add-module-exports": "^1.0.0",
@@ -201,6 +201,7 @@
     "babel-plugin-inline-react-svg": "^1.0.1",
     "babel-plugin-react-transform": "^3.0.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
+    "core-js": "^2.6.5",
     "cz-conventional-changelog": "^2.1.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
@@ -212,7 +213,7 @@
     "exports-loader": "^0.7.0",
     "istanbul-api": "^2.1.1",
     "istanbul-reports": "^2.1.1",
-    "jest-cli": "^23.6.0",
+    "jest-cli": "^24.1.0",
     "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^8.1.4",
     "pre-commit": "^1.2.2",
@@ -241,7 +242,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.2.0",
+    "@yeutech-lab/tree-operations": "^1.0.2",
     "classnames": "^2.2.6",
+    "deepmerge": "^3.2.0",
     "prop-types": "^15.7.2"
   },
   "peerDependencies": {
@@ -365,6 +368,10 @@
         "lines": 93
       }
     },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules",
+      "<rootDir>/internals"
+    ],
     "moduleDirectories": [
       "node_modules",
       "src"
@@ -374,7 +381,9 @@
     "setupFiles": [
       "raf/polyfill"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js"
+    "setupFilesAfterEnv": [
+      "<rootDir>/internals/testing/test-bundler.js"
+    ]
   },
   "declinationId": "react",
   "contributors": []

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withRouter from 'react-router-dom/withRouter';
 import makeRoutes from './makeRoutes';
-import isPathParamsPath from './isPathParamsPath';
+import matchParamsPath from './matchParamsPath';
 
 /**
  * @name Link
@@ -73,13 +73,13 @@ class Link extends React.Component {
     /** Define if react-router should change the page before or after the chunk is loaded */
     waitChunk: PropTypes.bool,
     /**
-     * The route configuration of the application, it supports childRoutes.
+     * The route configuration of the application, it supports routes.
      * To work with react-loadable, a route must contain a key named component that is the react-loadable component
      */
     routes: PropTypes.array,
     /**
      * A context consumer that will provide routes from it's context,
-     * It also supports childRoutes.
+     * It also supports routes.
      */
     ContextConsumer: PropTypes.any,
     /** @ignore */
@@ -126,7 +126,7 @@ class Link extends React.Component {
         if (dest === path) {
           return true;
         }
-        return isPathParamsPath(path, dest);
+        return matchParamsPath(path, dest);
       });
     if (res.length) {
       for (let i = 0; i < res.length; i += 1) {
@@ -182,7 +182,7 @@ class Link extends React.Component {
     if (onClick) {
       onClick(e);
     }
-    if (preload && waitChunk && component.preload) {
+    if (preload && waitChunk && component && component.preload) {
       if (onPreload) {
         onPreload(e);
       }

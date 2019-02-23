@@ -2,7 +2,7 @@
 
 ## getPages
 
-Looping through an array and find an entry require filtering. Find recursively a (`childRoutes`) won't look nice in your code.
+Looping through an array and find an entry require filtering. Find recursively a (`routes`) won't look nice in your code.
 
 it turn your array of `routes` into a `pages` object that can be used to access any `path`.
 
@@ -14,7 +14,7 @@ const routes = [{
   from: '/dashboard',
   to: '/',
   description: 'Dashboard',
-  childRoutes: [
+  routes: [
     {
       name: 'users',
       path: '/users',
@@ -37,12 +37,13 @@ const routes = [{
 ### Parameters
 
 -   `routeConfig` **[Array][1]** a list of route configuration
--   `default` **[object][2]** pages - an object pages to expand (optional, default `{}`)
+-   `pages` **[object][2]** an object pages to expand (optional, default `{}`)
+-   `childKey` **[string][3]** the children key used for flattening pages (optional, default `routes`)
 
 ### Examples
 
 ```javascript
-`childRoutes` are flattened in parent `[parent][route.name]` and are kept in `[parent].childRoutes` for faster accessibility.
+`routes` are flattened in parent `[parent][route.name]` and are kept in `[parent].routes` for faster accessibility.
 
 // This is how you would access a specific page in your routes configuration array:
 
@@ -53,7 +54,7 @@ const routes = [
     from: '/dashboard',
     to: '/',
     description: 'Dashboard',
-    childRoutes: [
+    routes: [
       {
         name: 'users',
         path: '/users',
@@ -74,7 +75,7 @@ const routes = [
     from: '/dashboard',
     to: '/',
     description: 'Dashboard',
-    childRoutes: [
+    routes: [
       {
         name: 'users',
         path: '/users',
@@ -95,3 +96,5 @@ Returns **[object][2]** pages - a pages object
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String

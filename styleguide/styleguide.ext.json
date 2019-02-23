@@ -32,6 +32,10 @@
           "name": "Utilities",
           "sections": [
             {
+              "name": "getRoutesMap",
+              "content": "docs/js/getRoutesMap.md"
+            },
+            {
               "name": "makeRoutes",
               "content": "docs/js/makeRoutes.md"
             },
@@ -40,8 +44,8 @@
               "content": "docs/js/getPages.md"
             },
             {
-              "name": "isPathParamsPath",
-              "content": "docs/js/isPathParamsPath.md"
+              "name": "matchParamsPath",
+              "content": "docs/js/matchParamsPath.md"
             }
           ]
         }
