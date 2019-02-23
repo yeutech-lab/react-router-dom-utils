@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
+import getRoutesMap from '../getRoutesMap';
 import Link from '../Link';
 
 // this will mock the loadable component
@@ -63,6 +64,8 @@ const testRoutes = [
   },
 ];
 
+const routesMap = getRoutesMap(testRoutes);
+
 const ctx = React.createContext();
 const ContextProvider = (props) => <ctx.Provider {...props} value={{ routes: testRoutes }} />;
 const ContextConsumer = ctx.Consumer;
@@ -88,6 +91,7 @@ describe('<Link />', () => {
   it('should mount a <Link /> tag', () => {
     const renderedComponent = renderComponent({
       routes: testRoutes,
+      routesMap,
       to: '/404.html',
     });
     expect(renderedComponent.find('a').length).toBe(1);
@@ -124,9 +128,16 @@ describe('<Link />', () => {
       routes: [
         {
           path: 'users/:id/service/:name',
-          component: 'Found',
+          component: () => <div>Found</div>,
         },
       ],
+      to: '/users/4564/service/this-is_cool',
+    });
+    const link = renderedComponent.find('Link');
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(null);
+  });
+  it('should also fail to getComponent', () => {
+    const renderedComponent = renderComponent({
       to: '/users/4564/service/this-is_cool',
     });
     const link = renderedComponent.find('Link');
@@ -230,6 +241,21 @@ describe('<Link />', () => {
     const spyLoaded = jest.fn();
     const renderedComponent = renderComponent({
       routes: testRoutes,
+      to: '/',
+      onPreload: spy,
+      onPageChange: spyPageChange,
+      onLoaded: spyLoaded,
+      waitChunk: true,
+    });
+    renderedComponent.simulate('click');
+    expect(spy).toHaveBeenCalled();
+  });
+  it('should waitChunk and onPreload onClick with routesMap', () => {
+    const spy = jest.fn();
+    const spyPageChange = jest.fn();
+    const spyLoaded = jest.fn();
+    const renderedComponent = renderComponent({
+      routesMap,
       to: '/',
       onPreload: spy,
       onPageChange: spyPageChange,
