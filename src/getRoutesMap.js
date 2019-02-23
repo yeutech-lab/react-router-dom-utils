@@ -1,3 +1,5 @@
+import 'core-js/es6/map';
+import 'core-js/fn/symbol/for';
 import merge from 'deepmerge';
 import TreeOps from '@yeutech-lab/tree-operations';
 
@@ -16,7 +18,7 @@ const defaultOptions = { soft: false, childKey: 'routes' };
  *
  * In non soft mode, it can throw error if the route already contain the component or is changing it's name within it's route configuration
  *
- * > For old browsers that does not support Map, use a polyfill in your application: https://www.npmjs.com/package/core-js
+ * > We use core-js/es6/map and core-js/fn/symbol/for for old browsers that does not support Map, see https://www.npmjs.com/package/core-js for more information.
  *
  *
  * @param {array} routesConfig - A list of routes configuration object that will be flatten and set in the map
