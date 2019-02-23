@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.4.1...v2.0.0) (2019-02-23)
+
+
+### Features
+
+* **getRoutesMap:** Added utility to create a Map of routes ([2789038](https://github.com/yeutech-lab/react-router-dom-utils/commit/2789038))
+
+
+### BREAKING CHANGES
+
+* **getRoutesMap:** To comply to react-router-config synthax, we have renamed childRoutes into routes
+in all our utilities.
+
 ## [1.4.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.4.0...v1.4.1) (2019-02-22)
 
 
