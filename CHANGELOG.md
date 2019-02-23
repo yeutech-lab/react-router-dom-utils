@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.0.0...v2.0.1) (2019-02-23)
+
+
+### Bug Fixes
+
+* **dist:** Added to globals and externals @yeutech-lab/tree-operations ([fb0a945](https://github.com/yeutech-lab/react-router-dom-utils/commit/fb0a945))
+
 # [2.0.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v1.4.1...v2.0.0) (2019-02-23)
 
 
