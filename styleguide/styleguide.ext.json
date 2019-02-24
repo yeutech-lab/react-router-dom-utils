@@ -24,8 +24,11 @@
           "content": "docs/installation.md"
         },
         {
-          "name": "Configuration",
-          "content": "docs/configuration.md",
+          "name": "Motivation",
+          "content": "docs/motivation.md"
+        },
+        {
+          "name": "UI Component",
           "components": "src/**/[A-Z]*.js"
         },
         {

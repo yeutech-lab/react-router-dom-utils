@@ -12,8 +12,11 @@ import makeRoutes from './makeRoutes';
 const Routes = ({ routes }) => <Fragment>{makeRoutes(routes)}</Fragment>;
 
 Routes.propTypes = {
-  /** An array of routes configuration */
-  routes: PropTypes.array.isRequired,
+  /** An array of routes configuration object or a routes Map */
+  routes: PropTypes.oneOfType(
+    PropTypes.instanceOf(Map),
+    PropTypes.array,
+  ).isRequired,
 };
 
 export default Routes;
