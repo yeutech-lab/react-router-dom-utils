@@ -13,10 +13,10 @@ const Routes = ({ routes }) => <Fragment>{makeRoutes(routes)}</Fragment>;
 
 Routes.propTypes = {
   /** An array of routes configuration object or a routes Map */
-  routes: PropTypes.oneOfType(
+  routes: PropTypes.oneOfType([
     PropTypes.instanceOf(Map),
     PropTypes.array,
-  ).isRequired,
+  ]).isRequired,
 };
 
 export default Routes;
