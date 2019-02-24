@@ -30,7 +30,8 @@ describe('should exports', () => {
       }],
     }];
     const routesCopy = [...routes];
-    expect(getPages(routes)).toEqual({
+    const p = getPages(routes);
+    expect(p).toEqual({
       hello: {
         name: 'hello',
         path: '/hello',
@@ -60,6 +61,7 @@ describe('should exports', () => {
         },
       },
     });
+    expect(p.hello.routes).not.toBeDefined();
     expect(routes).toEqual(routesCopy);
   });
 });
