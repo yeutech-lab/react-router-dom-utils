@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.1.0...v2.1.1) (2019-02-24)
+
+
+### Bug Fixes
+
+* **copy:** using shallow copy in all utilities ([d9286b6](https://github.com/yeutech-lab/react-router-dom-utils/commit/d9286b6))
+
 # [2.1.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.0.3...v2.1.0) (2019-02-23)
 
 
