@@ -19,6 +19,7 @@ import React from 'react';
  * // return [<Route name="home" path="/home" component={HomePage} />]
  */
 export default function makeRoutes(routesConfig, childKey = 'routes') {
+  const r = routesConfig instanceof Map ? [...routesConfig.values()] : [...routesConfig];
   const routeList = [];
   function recursive(routes) {
     routes.forEach((route) => {
@@ -73,6 +74,6 @@ export default function makeRoutes(routesConfig, childKey = 'routes') {
       }
     });
   }
-  recursive(routesConfig instanceof Map ? [...routesConfig.values()] : routesConfig);
+  recursive(r);
   return routeList;
 }

@@ -30,81 +30,88 @@ describe('should exports', () => {
       }],
     }];
     const routesCopy = [...routes];
+    JSON.stringify(getPages(routes), null, 2);
     expect(getPages(routes)).toEqual({
       bye: {
-        routes: [{
-          routes: [{
-            1337: {
-              name: '1337', path: '/bye/forest/gump/1337',
-            },
-            routes: [{
-              name: '1337', path: '/bye/forest/gump/1337',
-            }],
-            name: 'gump',
-            path: '/bye/forest/gump',
-          }],
-          gump: {
-            1337: {
-              name: '1337', path: '/bye/forest/gump/1337',
-            },
-            routes: [{
-              name: '1337', path: '/bye/forest/gump/1337',
-            }],
-            name: 'gump',
-            path: '/bye/forest/gump',
-          },
-          name: 'forest',
-          path: '/bye/forest',
-        }],
         forest: {
-          routes: [{
-            1337: {
-              name: '1337', path: '/bye/forest/gump/1337',
-            },
-            routes: [{
-              name: '1337', path: '/bye/forest/gump/1337',
-            }],
-            name: 'gump',
-            path: '/bye/forest/gump',
-          }],
           gump: {
             1337: {
-              name: '1337', path: '/bye/forest/gump/1337',
+              name: '1337',
+              path: '/bye/forest/gump/1337',
             },
-            routes: [{
-              name: '1337', path: '/bye/forest/gump/1337',
-            }],
             name: 'gump',
             path: '/bye/forest/gump',
+            routes: [
+              {
+                name: '1337',
+                path: '/bye/forest/gump/1337',
+              },
+            ],
           },
           name: 'forest',
           path: '/bye/forest',
+          routes: [
+            {
+              name: 'gump',
+              path: '/bye/forest/gump',
+              routes: [
+                {
+                  name: '1337',
+                  path: '/bye/forest/gump/1337',
+                },
+              ],
+            },
+          ],
         },
         name: 'bye',
         path: '/bye',
+        routes: [
+          {
+            name: 'forest',
+            path: '/bye/forest',
+            routes: [
+              {
+                name: 'gump',
+                path: '/bye/forest/gump',
+                routes: [
+                  {
+                    name: '1337',
+                    path: '/bye/forest/gump/1337',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
       hello: {
-        routes: [{
-          2017: {
-            name: '2017', path: '/hello/world/2017',
-          },
-          routes: [{
-            name: '2017', path: '/hello/world/2017',
-          }],
-          name: 'world',
-          path: '/hello/world',
-        }],
         name: 'hello',
         path: '/hello',
+        routes: [
+          {
+            name: 'world',
+            path: '/hello/world',
+            routes: [
+              {
+                name: '2017',
+                path: '/hello/world/2017',
+              },
+            ],
+          },
+        ],
         world: {
           2017: {
-            name: '2017', path: '/hello/world/2017',
+            name: '2017',
+            path: '/hello/world/2017',
           },
-          routes: [{
-            name: '2017', path: '/hello/world/2017',
-          }],
           name: 'world',
           path: '/hello/world',
+          routes: [
+            {
+              name: '2017',
+              path: '/hello/world/2017',
+            },
+          ],
         },
       },
     });
