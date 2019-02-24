@@ -94,8 +94,9 @@ export default function getPages(routeConfig, pages = {}, childKey = 'routes') {
   function addRoutes(routes, parent) {
     const innerCopy = [...routes];
     innerCopy.forEach((route) => {
-      parent[route.name] = route; // eslint-disable-line no-param-reassign
-      route[childKey] && addRoutes(route[childKey], route); // eslint-disable-line no-unused-expressions
+      const r = { ...route };
+      parent[r.name] = r; // eslint-disable-line no-param-reassign
+      route[childKey] && addRoutes(route[childKey], r); // eslint-disable-line no-unused-expressions
     });
   }
   addRoutes(copy, pages);

@@ -33,7 +33,8 @@ const defaultOptions = { soft: false, childKey: 'routes' };
  */
 export default function getRoutesMap(routesConfig, routesMap = new Map(), options = defaultOptions) {
   const { childKey, soft } = { ...defaultOptions, ...options };
-  const flattenRouteConfigList = TreeOps.toFlatArray(routesConfig, childKey);
+  const copy = [...routesConfig];
+  const flattenRouteConfigList = TreeOps.toFlatArray(copy, childKey);
   flattenRouteConfigList.forEach((route) => {
     const path = route.path || route.from;
     if (routesMap.has(path)) {
