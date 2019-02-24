@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.1.2...v2.1.3) (2019-02-24)
+
+
+### Bug Fixes
+
+* **getPages:** it now remove routes from the pages object ([c372aa0](https://github.com/yeutech-lab/react-router-dom-utils/commit/c372aa0))
+
 ## [2.1.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.1.1...v2.1.2) (2019-02-24)
 
 
