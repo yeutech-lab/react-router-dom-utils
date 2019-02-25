@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.1.3...v2.1.4) (2019-02-25)
+
+
+### Bug Fixes
+
+* **dependencies:** upgrade all dependencies, improve matchParamsPath ([a6cef0e](https://github.com/yeutech-lab/react-router-dom-utils/commit/a6cef0e))
+
 ## [2.1.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.1.2...v2.1.3) (2019-02-24)
 
 
