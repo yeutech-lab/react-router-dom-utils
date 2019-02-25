@@ -26,7 +26,7 @@ export default function matchParamsPath(path, pathWithParams) {
   const leading = pathWithParams[0] === '/' ? '/' : '';
   const recomposedList = [];
   for (let i = 0; i < p2.length; i += 1) {
-    if (p1[i] && p1[i].match(/:[A-z-0-9_]+/)) {
+    if (p1[i] && p1[i].match(/:\w+/)) {
       recomposedList.push(p2[i]);
     } else if (p1[i]) {
       recomposedList.push(p1[i]);
