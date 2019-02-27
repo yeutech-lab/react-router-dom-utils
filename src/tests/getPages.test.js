@@ -5,14 +5,14 @@ import getRoutesMap from '../getRoutesMap';
 describe('getPages', () => {
   const routes = [
     {
-      alias: 'myHello',
+      page: 'myHello',
       path: '/hello',
       component: () => <div>hi</div>,
       routes: [{
-        alias: 'myWorld',
+        page: 'myWorld',
         path: '/hello/world',
         routes: [{
-          alias: ['2017', 'two-thousand-seventeen', 'toRoot.two-thousand-seventeen'],
+          page: ['2017', 'two-thousand-seventeen', 'toRoot.two-thousand-seventeen'],
           path: '/hello/world/2017',
         }],
       }],
@@ -21,16 +21,16 @@ describe('getPages', () => {
       path: 'homepage/resource',
     },
     {
-      alias: 'myBye',
+      page: 'myBye',
       path: '/bye',
       routes: [{
-        alias: 'myByeForest',
+        page: 'myByeForest',
         path: '/bye/forest',
         routes: [{
-          alias: 'myGump',
+          page: 'myGump',
           path: '/bye/forest/gump',
           routes: [{
-            alias: 'toRoot.my1337',
+            page: 'toRoot.my1337',
             path: '/bye/forest/gump/1337',
           }],
         }],
