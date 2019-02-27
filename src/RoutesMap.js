@@ -17,9 +17,9 @@
  * const home = routesMap.get('/');
  * // get as usual
  * const editUser = routesMap.get('/users/:id');
- * // this should not work
- * const editUser = routesMap.get('/users/1');
- * // now it work
+ * // this is a valid path id
+ * const editUserCc = routesMap.get('/users/1');
+ * // this is invalid path id but RoutesMap can get it
  * <pre>
  *   routesMap.get('/users/1'):
  *

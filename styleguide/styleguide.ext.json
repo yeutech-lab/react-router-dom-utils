@@ -4,7 +4,8 @@
     "**/*.test.{js,jsx,ts,tsx}",
     "**/*.spec.{js,jsx,ts,tsx}",
     "**/*.d.ts",
-    "**/src/index.js"
+    "**/src/index.js",
+    "**/src/RoutesMap.js"
   ],
   "sections": [
     {
@@ -29,32 +30,14 @@
         },
         {
           "name": "UI Component",
-          "components": "src/**/[A-Z]*.js"
+          "components": [
+            "src/**/[A-Z]*.js",
+            "src/**/[A-Z]*/index.js"
+          ]
         },
         {
           "name": "Utilities",
-          "sections": [
-            {
-              "name": "RoutesMap",
-              "content": "docs/js/RoutesMap.md"
-            },
-            {
-              "name": "getRoutesMap",
-              "content": "docs/js/getRoutesMap.md"
-            },
-            {
-              "name": "makeRoutes",
-              "content": "docs/js/makeRoutes.md"
-            },
-            {
-              "name": "getPages",
-              "content": "docs/js/getPages.md"
-            },
-            {
-              "name": "matchParamsPath",
-              "content": "docs/js/matchParamsPath.md"
-            }
-          ]
+          "content": "docs/js/jsdoc.md"
         }
       ]
     },
