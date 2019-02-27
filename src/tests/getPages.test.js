@@ -153,3 +153,67 @@ describe('getPages', () => {
     });
   });
 });
+
+describe('getPages', () => {
+  it('should succeed all kind of merge', () => {
+    const routes = [{
+      from: '/user-management',
+      to: '/',
+      routes: [
+        // authority
+        {
+          page: 'authoritiesShow',
+          path: '/user-management/:resource/:id/authorities/show',
+        },
+        {
+          page: 'authoritiesEdit',
+          path: '/user-management/:resource/:id/authorities',
+        },
+        // user function
+        {
+          path: '/user-management/users',
+          menu: { role: 'VIEW_USER' },
+        },
+        // organizations function
+        {
+          path: '/user-management/organizations',
+          menu: { role: 'VIEW_ORG' },
+        },
+      ],
+    }];
+    const expectedPages = {
+      userManagement: {
+        $resource: {
+          $id: {
+            authorities: {
+              authoritiesShow: {
+                path: '/user-management/:resource/:id/authorities/show',
+              },
+              path: '/user-management/:resource/:id/authorities',
+              show: {
+                path: '/user-management/:resource/:id/authorities/show',
+              },
+            },
+            authoritiesEdit: {
+              path: '/user-management/:resource/:id/authorities',
+            },
+          },
+        },
+        organizations: {
+          menu: {
+            role: 'VIEW_ORG',
+          },
+          path: '/user-management/organizations',
+        },
+        users: {
+          menu: {
+            role: 'VIEW_USER',
+          },
+          path: '/user-management/users',
+        },
+      },
+    };
+    expect(getPages(routes)).toEqual(expectedPages);
+    expect(getPages(getRoutesMap(routes))).toEqual(expectedPages);
+  });
+});

@@ -134,16 +134,22 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
 
       camelCasePathList.forEach((onePathDepth, i) => {
         if (path === home.path && !pageAliasList.length) {
-          set(pages, home.page, merge(get(pages, home.page), page));
+          const value = get(pages, home.page) || {};
+          set(pages, home.page, merge(value, page));
         } else if (path === home.path) {
-          pageAliasList.forEach((alias) => set(pages, alias, merge(get(pages, alias), page)));
+          pageAliasList.forEach((alias) => {
+            const value = get(pages, alias) || {};
+            set(pages, alias, merge(value, page));
+          });
         } else if (pageDepth.length && i === camelCasePathList.length - 1) {
           const targetList = [camelCasePath].concat(pageAliasList).filter((f) => f);
           targetList.forEach((target) => {
             if (target.includes('.')) {
-              set(pages, target, merge(get(pages, target), page));
+              const value = get(pages, target) || {};
+              set(pages, target, merge(value, page));
             } else {
-              set(pages, `${pageDepth}.${target}`, merge(get(pages, `${pageDepth}.${target}`), page));
+              const value = get(pages, `${pageDepth}.${target}`) || {};
+              set(pages, `${pageDepth}.${target}`, merge(value, page));
             }
           });
         } else {
