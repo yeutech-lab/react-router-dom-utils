@@ -22,7 +22,7 @@ Returns **[string][1]** camelizePath - a camel case dotted string representation
 
 ## getPages
 
-Utility to convert an array of routes configuration into a pages object that can be used to create link to page.
+Utility to convert an array of routes configuration or a routes map into a pages object that can be used to create link to page.
 It use the `route.path` to determinate a camelcase key dotted name and append it in a nested object.
 It also read for `route.page` to create page aliases.
 It is recommended to inject `pages` into the application context so Link component can quickly access it..
@@ -31,19 +31,67 @@ It is recommended to inject `pages` into the application context so Link compone
 const routesConfig = [{ path: '/', component: Dashboard, page: 'dashboard' }, { path: '/users', component: UserList }];
 const pages = getPages(routesConfig);
 // { dashboard: { path: '/' }, users: { path: '/users' } }
+
+// This also work with routes map
+getPages(getRoutesMap(routesConfig));
+// { dashboard: { path: '/' }, users: { path: '/users' } }
 ```
 
 _Params_
 
 `path` with params such as `/users/:id` will be added to `pages` with the colon replaced with the dollar sign: `pages.users.$id`.
 
-_Aliases_:
+```javascript
+const routesConfig = [{
+ path: '/users',
+ component: UserList,
+ routes: [{
+   path: '/users/:id',
+   component: UserEdit,
+ }],
+}];
+const pages = getPages(routesConfig);
+pages.users.$id.path
+// /users/:id
+```
+
+_Aliases:_
 
 It is possible to create an alias of any page using `route.page`.
 
 `{string|array} route.page` - An array or a string to create alias.
 It cannot use dot (`.`) in their name unless you want to add the alias at the root of the `pages` object,
 in this case it will use the dot to traverse the object and set the value.
+
+```javascript
+const routesConfig = [{
+  path: '/',
+  component: Dashboard,
+  page: 'dashboard'
+}, {
+ path: '/users',
+ component: UserList,
+ routes: [{
+   alias: ['edit', 'dashboard.userEdit'],
+   path: '/users/:id',
+   component: UserEdit,
+ }],
+}];
+const pages = getPages(routesConfig);
+
+// use the generated key
+pages.users.$id.path
+// /users/:id
+
+// or use the aliased one
+pages.users.edit.path
+// /users/:id
+
+
+// or use an alias from root of pages
+pages.dashboard.userEdit.path
+// /users/:id
+```
 
 > The base path `/` can be added to `pages` only if a `page` alias exist for it.
 

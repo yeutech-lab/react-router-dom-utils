@@ -8,7 +8,8 @@
     "core-js": "CoreJs",
     "lodash.get":  "get",
     "lodash.set":  "set",
-    "lodash.camelcase":"camelcase"
+    "lodash.omit": "omit",
+    "lodash.camelcase":"camelCase"
   },
   "external": [
     "react",
@@ -19,6 +20,7 @@
     "core-js",
     "lodash.get",
     "lodash.set",
+    "lodash.omit",
     "lodash.camelcase"
   ]
 }
