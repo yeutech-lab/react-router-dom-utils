@@ -1,3 +1,11 @@
+## [2.2.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.1...v2.2.2) (2019-02-27)
+
+
+### Bug Fixes
+
+* **getPages:** now automatically detecting home ([7073c82](https://github.com/yeutech-lab/react-router-dom-utils/commit/7073c82))
+* **pages:** Rename alias to page ([754013a](https://github.com/yeutech-lab/react-router-dom-utils/commit/754013a))
+
 ## [2.2.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.0...v2.2.1) (2019-02-27)
 
 
