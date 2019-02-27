@@ -21,13 +21,13 @@ Our utilities help to use this array of route configuration within our applicati
 A route configuration object is a configuration that can be use later to create the react-router `<Route />` or `<Redirect />` components.
 Read available props : 
 
-- `<Route />`: [doc](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md).
-- `<Redirect />`: [doc](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md).
+- `<Route />`: [Read documentation](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md).
+- `<Redirect />`: [Read documentation](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md).
 
-We use [getPages](#get-pages) utility to turn the `routeList` configuration into a `pages` object that can be traversed more efficiently than the array when writing links.
+We use `getPages` utility to turn the `routeList` configuration into a `pages` object that can be traversed more efficiently than the array when writing links.
 
 ```js
-const { getPages } = require('$PACKAGE_NAME/lib');
+const { getPages } = require('$PACKAGE_NAME');
 
 // routes configuration
 const routes = [{
@@ -59,7 +59,7 @@ The flat architecture of the map and it's unique id makes it easier to found upd
 To creates a `routesMap`, just pass the array of route configuration to `getRoutesMap` function:
 
 ```js
-const { getRoutesMap } = require('$PACKAGE_NAME/lib');
+const { getRoutesMap } = require('$PACKAGE_NAME');
 
 // routes configuration
 const routes = [{
