@@ -35,6 +35,10 @@
           "name": "Utilities",
           "sections": [
             {
+              "name": "RoutesMap",
+              "content": "docs/js/RoutesMap.md"
+            },
+            {
               "name": "getRoutesMap",
               "content": "docs/js/getRoutesMap.md"
             },

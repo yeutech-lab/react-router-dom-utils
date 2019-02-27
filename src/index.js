@@ -4,3 +4,4 @@ export { default as getPages } from './getPages';
 export { default as getRoutesMap } from './getRoutesMap';
 export { default as Link } from './Link';
 export { default as matchParamsPath } from './matchParamsPath';
+export { default as RoutesMap } from './RoutesMap';

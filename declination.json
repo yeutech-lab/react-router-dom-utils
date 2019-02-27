@@ -5,7 +5,10 @@
     "react-router-dom": "react-router-dom",
     "deepmerge": "merge",
     "@yeutech-lab/tree-operations": "TreeOps",
-    "core-js": "CoreJs"
+    "core-js": "CoreJs",
+    "lodash.get":  "get",
+    "lodash.set":  "set",
+    "lodash.camelcase":"camelcase"
   },
   "external": [
     "react",
@@ -13,6 +16,9 @@
     "react-router-dom",
     "deepmerge",
     "@yeutech-lab/tree-operations",
-    "core-js"
+    "core-js",
+    "lodash.get",
+    "lodash.set",
+    "lodash.camelcase"
   ]
 }

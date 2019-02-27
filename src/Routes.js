@@ -5,7 +5,7 @@ import makeRoutes from './makeRoutes';
 /**
  * @description
  * Generate all Routes components for your application, it can be used within a Switch.
- * @param {object|Map<string, object>} props -  props with props.routes an array of routes configuration or a routes map
+ * @param {object|Map<string, object>|RoutesMap<string, object>} routes -  an array of routes configuration a map or a routes map
  * @returns {Route[]}
  * @constructor
  */

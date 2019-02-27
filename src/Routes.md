@@ -1,4 +1,4 @@
-It expect an [`Array`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array) of `route` configuration object or
+It expect an [`Array`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array) of `route` configuration object, a [map](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map) or
 a [`routeMap`](#getroutesmap).
 
 See [`<Route />`](https://reacttraining.com/react-router/web/api/Route) documentation for more info.

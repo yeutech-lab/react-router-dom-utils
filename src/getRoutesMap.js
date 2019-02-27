@@ -2,14 +2,17 @@ import 'core-js/es6/map';
 import 'core-js/fn/symbol/for';
 import merge from 'deepmerge';
 import TreeOps from '@yeutech-lab/tree-operations';
-
+import RoutesMap from './RoutesMap';
 const defaultOptions = { soft: false, childKey: 'routes' };
 /**
  * @public
  * @description
  * This routeMap was created to store a map of all routes within applications.
  *
- * It set routes into a Map. This map is a mapping for one path to a route configuration.
+ * It set routes into a RoutesMap. This map one path to a route configuration.
+ *
+ * RoutesMap class extends from Map and has a modified get method that permit to get using `/users/1` and get `/users/:id`
+ *
  * The path can be seen as the id of the route, and the configuration is what is actually used for the route.
  *
  * To set redirect route, just add from and to instead of path in the redirect route configuration
@@ -22,16 +25,16 @@ const defaultOptions = { soft: false, childKey: 'routes' };
  *
  *
  * @param {array} routesConfig - A list of routes configuration object that will be flatten and set in the map
- * @param {Map} [routesMap=new Map()] - An optional existing routeMap
+ * @param {RoutesMap} [routesMap=new RoutesMap()] - An optional existing routeMap
  * @param {object} [options={ soft: false, childKey: 'routes' }] - Options to configure getRoutesMap,
  * if options.soft is true, it will skip all errors found during the merge,
  * if options.soft is false, it will throw error if a route already:
  *   - have a component and a second is found
  *   - have a name and different name is found
  *
- * @return {Map<string, object>} - The routeMap object used for your application
+ * @return {RoutesMap<string, object>} - The routeMap object used for your application
  */
-export default function getRoutesMap(routesConfig, routesMap = new Map(), options = defaultOptions) {
+export default function getRoutesMap(routesConfig, routesMap = new RoutesMap(), options = defaultOptions) {
   const { childKey, soft } = { ...defaultOptions, ...options };
   const copy = [...routesConfig];
   const flattenRouteConfigList = TreeOps.toFlatArray(copy, childKey);
@@ -48,7 +51,7 @@ export default function getRoutesMap(routesConfig, routesMap = new Map(), option
         }
       }
       routesMap.set(path, merge(existingData, route));
-    } else {
+    } else if (path) {
       routesMap.set(path, route);
     }
   });

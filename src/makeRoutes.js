@@ -11,7 +11,7 @@ import React from 'react';
  * <div>{Routes[0].props.name} is <code>home</code></div>;
  * ```
  *
- * @param {Array|Map<string,object>} routesConfig|routesMap - list of route configuration
+ * @param {Array|Map<string,object>|RoutesMap<string,object>} routesConfig - list of route configuration object, a map or a routes map
  * @param {string} [childKey=routes] - the children key used for flattening pages
  * @returns {Array} routeList - list of <Route /> and <Redirect />
  * @example
