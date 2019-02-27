@@ -12,7 +12,7 @@ const Routes = makeRoutes([{ name: 'home', path: '/home', component: () => <div>
 
 ### Parameters
 
--   `routesConfig` **([Array][1] \| [Map][2]&lt;[string][3], [object][4]>)** |routesMap - list of route configuration
+-   `routesConfig` **([Array][1] \| [Map][2]&lt;[string][3], [object][4]> | RoutesMap&lt;[string][3], [object][4]>)** list of route configuration object, a map or a routes map
 -   `childKey` **[string][3]** the children key used for flattening pages (optional, default `routes`)
 
 ### Examples

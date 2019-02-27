@@ -4,7 +4,10 @@
 
 This routeMap was created to store a map of all routes within applications.
 
-It set routes into a Map. This map is a mapping for one path to a route configuration.
+It set routes into a RoutesMap. This map one path to a route configuration.
+
+RoutesMap class extends from Map and has a modified get method that permit to get using `/users/1` and get `/users/:id`
+
 The path can be seen as the id of the route, and the configuration is what is actually used for the route.
 
 To set redirect route, just add from and to instead of path in the redirect route configuration
@@ -13,25 +16,67 @@ Before adding a route to the map, it will test if the route exist and if it exis
 
 In non soft mode, it can throw error if the route already contain the component or is changing it's name within it's route configuration
 
-> For old browsers that does not support Map, use a polyfill in your application: [https://www.npmjs.com/package/core-js][1]
+> We use core-js/es6/map and core-js/fn/symbol/for for old browsers that does not support Map, see [https://www.npmjs.com/package/core-js][1] for more information.
 
 ### Parameters
 
 -   `routesConfig` **[array][2]** A list of routes configuration object that will be flatten and set in the map
--   `routesMap` **[Map][3]** An optional existing routeMap (optional, default `newMap()`)
+-   `routesMap` **[RoutesMap][3]** An optional existing routeMap (optional, default `newRoutesMap()`)
 -   `options` **[object][4]** Options to configure getRoutesMap,
     if options.soft is true, it will skip all errors found during the merge,
     if options.soft is false, it will throw error if a route already:-   have a component and a second is found
     -   have a name and different name is found (optional, default `{soft:false,childKey:'routes'}`)
 
-Returns **[Map][3]&lt;[string][5], [object][4]>** The routeMap object used for your application
+Returns **[RoutesMap][3]&lt;[string][5], [object][4]>** The routeMap object used for your application
+
+## RoutesMap
+
+**Extends Map**
+
+RoutesMap class extend Map class and has an edited get method to retrieve route from parameterized path.
+
+Be aware that the `has` method will still check for the exact match.
+
+See: [https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map/get][6]
+
+```js
+const { RoutesMap } = require('$PACKAGE_NAME');
+const routesMap = new RoutesMap([
+ ['/', { name: 'Home' }],
+ ['/users/:id', { name: 'EditUser' }],
+]);
+// get as usual (See https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map/get)
+const home = routesMap.get('/');
+// get as usual
+const editUser = routesMap.get('/users/:id');
+// this should not work
+const editUser = routesMap.get('/users/1');
+// now it work
+<pre>
+  routesMap.get('/users/1'):
+
+  JSON.stringify(editUser, null, 2)
+</pre>
+```
+
+### get
+
+The get method can get a routes that use params using a path with params set.
+
+#### Parameters
+
+-   `key`  It can get from the usual key or a routes with params such as `/users/1`
+
+Returns **V** The route configuration object of the route, or undefined if not found
 
 [1]: https://www.npmjs.com/package/core-js
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map
+[3]: #routesmap
 
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 [5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[6]: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map/get

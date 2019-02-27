@@ -138,13 +138,19 @@ class Link extends React.Component {
    * This function will look through a list of routes configuration object and a routes Map to try to retrieve
    * a component that may be attached to the root.
    * It will look first using the map, and if not found, using the routes
-   * @param path
-   * @param routes
-   * @param routesMap
+   * @param {string} path - Real path to get component for
+   * @param {array} routes - List of route configuration object
+   * @param {Map<string, object>|RoutesMap<string, object>} routesMap - Routes map of all routes.
    * @return {component} - React component attached to the routes
    */
   getComponent(path, routes = [], routesMap = new Map()) {
-    let component = null;
+    let component;
+    // Find in the map (only work for RoutesMap)
+    const inMap = routesMap.get(path);
+    if (inMap && inMap.component) {
+      return inMap.component;
+    }
+    // support for routes and standard Map
     const list = [Array.from((routesMap).values()), routes];
     for (let i = 0; i < list.length; i += 1) {
       if (list[i].length) {

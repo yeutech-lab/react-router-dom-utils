@@ -1,104 +1,87 @@
+import merge from 'deepmerge';
+import camelcase from 'lodash.camelcase';
+import get from 'lodash.get';
+import set from 'lodash.set';
+
 /**
  * @public
- * @name getPages
  * @description
+ * This utility convert a path to a camelCase dotted string.
+ * Every parameter within the path will see the colon replaced with a dollar
+ * @example
+ * camelizePath('users/:id');
+ * // users.$id
+ * camelizePath('/users/all');
+ * // users.all
+ * @param {string} path - A valid react router path
+ * @return {string} camelizePath - a camel case dotted string representation of the path
+ */
+export function camelizePath(path) {
+  return (path[0] === '/' ? path.slice(1) : path)
+    .split('/')
+    .map((p) => (p[0] === ':' ? `$${camelcase(p.slice(1))}` : camelcase(p)))
+    .join('.');
+}
+
+/**
+ * @public
+ * @description
+ * Utility to convert an array of routes configuration into a pages object.
  *
- * Looping through an array and find an entry require filtering. Find recursively a (`routes`) won't look nice in your code.
- *
- * it turn your array of `routes` into a `pages` object that can be used to access any `path`.
- *
- * ```js
- * const getPages = require('$PACKAGE_NAME/lib/getPages');
- * const routes = [{
- *   name: 'dashboard',
- *   redirect: true,
- *   from: '/dashboard',
- *   to: '/',
- *   description: 'Dashboard',
- *   routes: [
- *     {
- *       name: 'users',
- *       path: '/users',
- *       description: 'List users',
- *     },
- *   ],
- * }];
- * <div>
- *   <h2>routes:</h2>
- *   <pre>
- *     {JSON.stringify(routes, null, 2)}
- *   </pre>
- *   <h2>pages:</h2>
- *   <pre>
- *     {JSON.stringify(getPages(routes), null, 2)}
- *   </pre>
- * </div>
+ *```javascript
+ * const routesConfig = [{ path: '/', component: Dashboard, alias: 'dashboard' }, { path: '/users', component: UserList }];
+ * const pages = getPages(routesConfig);
+ * // { dashboard: { path: '/' }, users: { path: '/users' } }
  * ```
  *
- * @param {Array} routeConfig - a list of route configuration
- * @param {object} [pages={}] - an object pages to expand
- * @param {string} [childKey=routes] - the children key used for flattening pages
- * @return {object} pages - a pages object
- * @example
- * `routes` are flattened in parent `[parent][route.name]` and are kept in `[parent].routes` for faster accessibility.
+ * *Params*
  *
- * // This is how you would access a specific page in your routes configuration array:
+ * `path` with params such as `/users/:id` will be added to `pages` with the colon replaced with the dollar sign.
  *
- * const routes = [
- *   {
- *     name: 'dashboard',
- *     redirect: true,
- *     from: '/dashboard',
- *     to: '/',
- *     description: 'Dashboard',
- *     routes: [
- *       {
- *         name: 'users',
- *         path: '/users',
- *         description: 'List users',
- *       },
- *     ],
- *   }
- * ];
- * const page = routes.filter((route) => route.name === 'dashboard')[0]
+ * *Alias*:
  *
- * // This is how you do with `getPages`:
+ * It is possible to duplicate a reference to a route called page alias.
  *
- * const { getPages } = require('@yeutech-lab/react-router-dom-utils');
- * const routes = [
- *   {
- *     name: 'dashboard',
- *     redirect: true,
- *     from: '/dashboard',
- *     to: '/',
- *     description: 'Dashboard',
- *     routes: [
- *       {
- *         name: 'users',
- *         path: '/users',
- *         description: 'List users',
- *       },
- *     ],
- *   }
- * ];
- * const pages = getPages(routes);
- * <ul>
- *   <li>{pages.dashboard.description}: {pages.dashboard.from}</li>
- *   <li>{pages.dashboard.users.description}: {pages.dashboard.users.path}</li>
- * </ul>
+ * `{string|array} alias` that can be set in each `route`.
  *
+ * Alias should not use dot (`.`) in their name unless you want to add at the root of the `pages` object,
+ * in this case it will use it to traverse within the object to set the value.
  *
+ * > The base path `/` can be added to `pages` only if an `alias` exist.
+ *
+ * @param {Object[]|RoutesMap|Map} routesConfig or routesMap - An array of routes configuration object or a routes map that will be translated into pages
+ * @param {object} [pages={}] - A pages object
+ * @param {string} [childKey=routes] - When using a routes config, this will be the key used to find nested array of routes configuration object.
  */
-export default function getPages(routeConfig, pages = {}, childKey = 'routes') {
-  const copy = [...routeConfig];
-  function addRoutes(routes, parent) {
-    const innerCopy = [...routes];
-    innerCopy.forEach((route) => {
-      const { routes: ex1, component: ex2, ...r } = route;
-      parent[r.name] = r; // eslint-disable-line no-param-reassign
-      route[childKey] && addRoutes(route[childKey], r); // eslint-disable-line no-unused-expressions
-    });
-  }
-  addRoutes(copy, pages);
+export default function getPages(routesConfig, pages = {}, childKey = 'routes') {
+  const isRoutesMap = routesConfig instanceof Map;
+  [...routesConfig].forEach((routeOrMap) => {
+    const route = isRoutesMap ? routeOrMap[1] : routeOrMap;
+    const {
+      routes: x1, component: x2, path, alias, ...r
+    } = route;
+    const page = { ...r, path };
+    let pageDepth = '';
+    if (path) {
+      const camelCasePath = camelizePath(path);
+      const camelCasePathList = camelCasePath.split('.');
+      camelCasePathList.forEach((onePathDepth, i) => {
+        if (pageDepth.length && i === camelCasePathList.length - 1) {
+          const targetList = [camelCasePath].concat(alias instanceof Array ? alias : [alias]).filter((f) => f);
+          targetList.forEach((target) => {
+            if (target.includes('.')) {
+              set(pages, target, merge(get(pages, target), page));
+            } else {
+              set(pages, `${pageDepth}.${target}`, merge(get(pages, `${pageDepth}.${target}`), page));
+            }
+          });
+        } else {
+          pageDepth = pageDepth.length === 0 ? onePathDepth : `${pageDepth}.${onePathDepth}`;
+        }
+      });
+    }
+    route[childKey] && getPages(route[childKey], pages, childKey); // eslint-disable-line no-unused-expressions
+  });
+
   return pages;
 }

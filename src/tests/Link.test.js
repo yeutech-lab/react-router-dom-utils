@@ -121,7 +121,7 @@ describe('<Link />', () => {
       to: 'users/4564/service/this-is_cool',
     });
     const link = renderedComponent.find('Link');
-    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(null);
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(undefined);
   });
   it('should also fail to getComponent', () => {
     const renderedComponent = renderComponent({
@@ -134,14 +134,14 @@ describe('<Link />', () => {
       to: '/users/4564/service/this-is_cool',
     });
     const link = renderedComponent.find('Link');
-    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(null);
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(undefined);
   });
   it('should also fail to getComponent', () => {
     const renderedComponent = renderComponent({
       to: '/users/4564/service/this-is_cool',
     });
     const link = renderedComponent.find('Link');
-    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(null);
+    expect(link.instance().getComponent(link.prop('to'), link.prop('routes'))).toBe(undefined);
   });
   it('should onMouseOver', () => {
     const spy = jest.fn();
@@ -250,7 +250,7 @@ describe('<Link />', () => {
     renderedComponent.simulate('click');
     expect(spy).toHaveBeenCalled();
   });
-  it('should waitChunk and onPreload onClick with routesMap', () => {
+  it('should waitChunk and onPreload onClick with routesMap', (done) => {
     const spy = jest.fn();
     const spyPageChange = jest.fn();
     const spyLoaded = jest.fn();
@@ -264,6 +264,7 @@ describe('<Link />', () => {
     });
     renderedComponent.simulate('click');
     expect(spy).toHaveBeenCalled();
+    done();
   });
   it('should waitChunk onClick', () => {
     const renderedComponent = renderComponent({
