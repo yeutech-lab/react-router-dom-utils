@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.2...v2.2.3) (2019-02-27)
+
+
+### Bug Fixes
+
+* **getPages:** fix error during merge ([51a7a36](https://github.com/yeutech-lab/react-router-dom-utils/commit/51a7a36))
+
 ## [2.2.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.1...v2.2.2) (2019-02-27)
 
 
