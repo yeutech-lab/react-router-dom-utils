@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.1.4...v2.2.0) (2019-02-27)
+
+
+### Bug Fixes
+
+* **dependencies:** upgrade all dependencies ([ac2469d](https://github.com/yeutech-lab/react-router-dom-utils/commit/ac2469d))
+
+
+### Features
+
+* **RoutesMap:** added RoutesMap class, improve getPages to support alias (config) and routesMap (source) ([0e14c4b](https://github.com/yeutech-lab/react-router-dom-utils/commit/0e14c4b))
+
 ## [2.1.4](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.1.3...v2.1.4) (2019-02-25)
 
 
