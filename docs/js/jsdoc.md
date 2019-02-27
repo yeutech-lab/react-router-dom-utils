@@ -3,7 +3,7 @@
 ## camelizePath
 
 This utility convert a path to a camelCase dotted string.
-Every parameter within the path will see the colon replaced with a dollar
+Every parameter within the path will see the colon replaced with a dollar sign.
 
 ### Parameters
 
@@ -22,28 +22,78 @@ Returns **[string][1]** camelizePath - a camel case dotted string representation
 
 ## getPages
 
-Utility to convert an array of routes configuration into a pages object.
+Utility to convert an array of routes configuration or a routes map into a pages object that can be used to create link to page.
+It use the `route.path` to determinate a camelcase key dotted name and append it in a nested object.
+It also read for `route.page` to create page aliases.
+It is recommended to inject `pages` into the application context so Link component can quickly access it..
 
 ```javascript
-const routesConfig = [{ path: '/', component: Dashboard, alias: 'dashboard' }, { path: '/users', component: UserList }];
+const routesConfig = [{ path: '/', component: Dashboard, page: 'dashboard' }, { path: '/users', component: UserList }];
 const pages = getPages(routesConfig);
+// { dashboard: { path: '/' }, users: { path: '/users' } }
+
+// This also work with routes map
+getPages(getRoutesMap(routesConfig));
 // { dashboard: { path: '/' }, users: { path: '/users' } }
 ```
 
 _Params_
 
-`path` with params such as `/users/:id` will be added to `pages` with the colon replaced with the dollar sign.
+`path` with params such as `/users/:id` will be added to `pages` with the colon replaced with the dollar sign: `pages.users.$id`.
 
-_Alias_:
+```javascript
+const routesConfig = [{
+ path: '/users',
+ component: UserList,
+ routes: [{
+   path: '/users/:id',
+   component: UserEdit,
+ }],
+}];
+const pages = getPages(routesConfig);
+pages.users.$id.path
+// /users/:id
+```
 
-It is possible to duplicate a reference to a route called page alias.
+_Aliases:_
 
-`{string|array} alias` that can be set in each `route`.
+It is possible to create an alias of any page using `route.page`.
 
-Alias should not use dot (`.`) in their name unless you want to add at the root of the `pages` object,
-in this case it will use it to traverse within the object to set the value.
+`{string|array} route.page` - An array or a string to create alias.
+It cannot use dot (`.`) in their name unless you want to add the alias at the root of the `pages` object,
+in this case it will use the dot to traverse the object and set the value.
 
-> The base path `/` can be added to `pages` only if an `alias` exist.
+```javascript
+const routesConfig = [{
+  path: '/',
+  component: Dashboard,
+  page: 'dashboard'
+}, {
+ path: '/users',
+ component: UserList,
+ routes: [{
+   alias: ['edit', 'dashboard.userEdit'],
+   path: '/users/:id',
+   component: UserEdit,
+ }],
+}];
+const pages = getPages(routesConfig);
+
+// use the generated key
+pages.users.$id.path
+// /users/:id
+
+// or use the aliased one
+pages.users.edit.path
+// /users/:id
+
+
+// or use an alias from root of pages
+pages.dashboard.userEdit.path
+// /users/:id
+```
+
+> The base path `/` can be added to `pages` only if a `page` alias exist for it.
 
 ### Parameters
 

@@ -235,6 +235,7 @@
     "deepmerge": "^3.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.get": "^4.4.2",
+    "lodash.omit": "^4.5.0",
     "lodash.set": "^4.3.2",
     "prop-types": "^15.7.2"
   },

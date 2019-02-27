@@ -31,7 +31,7 @@ const { getPages } = require('$PACKAGE_NAME');
 
 // routes configuration
 const routes = [{
-  name: 'home',
+  page: 'home',
   path: '/',
 }];
 
@@ -42,28 +42,26 @@ const pages = getPages(routes);
 
 ## Using route within your application
 
+We have created a custom `Map` class called `RoutesMap` which is desgigned to store the routes of an application more efficiently than the standard list of route configuration object.
 
-A typical use case to use `routesMap` instead of an array of `routesConfig` is when
-you have a large application with many routes configuration coming from everywhere.
-
-This will ensure uniqueness of the route identified by it's path.
+An optimal use case to prefer `routesMap` instead of an array of `routesConfig` is when you have a large application with many routes configuration coming from everywhere.
 
 > Because a route can exist only once per application lifetime, 
 we recommend to use a `routesMap` after the initialization of your application.
-(Instead of directly using the `routesConfig` array)
+(Instead of directly using the `routesConfig` array), even if we have designed all our utilities to support both.
 
-Using `Map` have numerous advantages, unique route configuration can be done using the unique `path`. 
+Using `Map` have numerous advantages, unique route configuration can be done using the unique `path`, this ensure uniqueness of the route.
 
-The flat architecture of the map and it's unique id makes it easier to found updated or merged routes more easily.
+The flat architecture of the map and it's unique id makes it easier to find, update and merge routes.
 
-To creates a `routesMap`, just pass the array of route configuration to `getRoutesMap` function:
+To get a `routesMap`, just pass the array of route configuration to `getRoutesMap` function:
 
 ```js
 const { getRoutesMap } = require('$PACKAGE_NAME');
 
 // routes configuration
 const routes = [{
-  name: 'home',
+  page: 'home',
   path: '/',
 }];
 

@@ -2,17 +2,51 @@ import React from 'react';
 import getPages from '../getPages';
 import getRoutesMap from '../getRoutesMap';
 
+describe('getPages homepage with /', () => {
+  it('should set home page automatically', () => {
+    expect(getPages([{
+      path: '/',
+    }])).toEqual({
+      home: {
+        path: '/',
+      },
+    });
+  });
+  it('should use the alias for homepage when set', () => {
+    const p = getPages([{
+      path: '/',
+      page: 'newHome',
+    }]);
+    expect(p).toEqual({
+      newHome: {
+        path: '/',
+      },
+    });
+    const p2 = getPages([{
+      path: '/',
+      page: ['newHome', 'newHome.sub'],
+    }]);
+    expect(p2).toEqual({
+      newHome: {
+        path: '/',
+        sub: {
+          path: '/',
+        },
+      },
+    });
+  });
+});
 describe('getPages', () => {
   const routes = [
     {
-      alias: 'myHello',
+      page: 'myHello',
       path: '/hello',
       component: () => <div>hi</div>,
       routes: [{
-        alias: 'myWorld',
+        page: 'myWorld',
         path: '/hello/world',
         routes: [{
-          alias: ['2017', 'two-thousand-seventeen', 'toRoot.two-thousand-seventeen'],
+          page: ['2017', 'two-thousand-seventeen', 'toRoot.two-thousand-seventeen'],
           path: '/hello/world/2017',
         }],
       }],
@@ -21,16 +55,16 @@ describe('getPages', () => {
       path: 'homepage/resource',
     },
     {
-      alias: 'myBye',
+      page: 'myBye',
       path: '/bye',
       routes: [{
-        alias: 'myByeForest',
+        page: 'myByeForest',
         path: '/bye/forest',
         routes: [{
-          alias: 'myGump',
+          page: 'myGump',
           path: '/bye/forest/gump',
           routes: [{
-            alias: 'toRoot.my1337',
+            page: 'toRoot.my1337',
             path: '/bye/forest/gump/1337',
           }],
         }],

@@ -6,53 +6,53 @@ See [`<Route />`](https://reacttraining.com/react-router/web/api/Route) document
 ```js static
 const routes = [
   {
-    name: 'home',
+    page: 'home',
     path: '/',
     exact: true,
   },
   {
-    name: 'customers',
+    page: 'customers',
     path: '/customers.html',
     exact: true,
     routes: [
       {
-        name: 'aboutUs',
+        page: 'aboutUs',
         path: '/about-us.html',
         exact: true,
       },
       {
-        name: 'career',
+        page: 'career',
         path: '/career.html',
         exact: true,
       },
       {
-        name: 'faq',
+        page: 'faq',
         path: '/faq.html',
         exact: true,
       },
       {
-        name: 'cgu',
+        page: 'cgu',
         path: '/CGU.html',
         exact: true,
       },
       {
-        name: 'confidentiality',
+        page: 'confidentiality',
         path: '/Confidentiality.html',
         exact: true,
       },
       {
-        name: 'cookies',
+        page: 'cookies',
         path: '/cookies.html',
         exact: true,
       },
     ],
   },
   {
-    name: 'notFound',
+    page: 'notFound',
     path: '/404.html',
   },
   {
-    name: 'notFoundRedirect',
+    page: 'notFoundRedirect',
     from: '*',
     to: '/404.html',
   },
@@ -70,25 +70,25 @@ const {
 
 const routes = [
   {
-    name: 'home',
+    page: 'home',
     path: '/',
     exact: true,
     component: () => <div>home</div>,
   },
   {
-    name: 'customers',
+    page: 'customers',
     path: '/customers.html',
     exact: true,
     component: () => <div>home</div>,
     routes: [
       {
-        name: 'aboutUs',
+        page: 'aboutUs',
         path: '/about-us.html',
         exact: true,
         component: () => <div>home</div>,
         routes: [
           {
-            name: 'theVision',
+            page: 'theVision',
             path: '/about-us/the-vision.html',
             exact: true,
             component: () => <div>home</div>,
@@ -96,31 +96,31 @@ const routes = [
         ],
       },
       {
-        name: 'career',
+        page: 'career',
         path: '/career.html',
         exact: true,
         component: () => <div>home</div>,
       },
       {
-        name: 'faq',
+        page: 'faq',
         path: '/faq.html',
         exact: true,
         component: () => <div>home</div>,
       },
       {
-        name: 'cgu',
+        page: 'cgu',
         path: '/CGU.html',
         exact: true,
         component: () => <div>home</div>,
       },
       {
-        name: 'confidentiality',
+        page: 'confidentiality',
         path: '/Confidentiality.html',
         exact: true,
         component: () => <div>home</div>,
       },
       {
-        name: 'cookies',
+        page: 'cookies',
         path: '/cookies.html',
         exact: true,
         component: () => <div>home</div>,
@@ -128,7 +128,7 @@ const routes = [
     ],
   },
   {
-    name: 'notFound',
+    page: 'notFound',
     path: '/404.html',
     component: () => <h1>404 Page not found</h1>,
   },
@@ -143,9 +143,9 @@ const reference = {
 const createNavigation = (routes, padding = 0) => (
   <ul style={{ marginLeft: `${padding}px` }}>
     {routes.map((route) => (
-      <li key={route.name}>
+      <li key={route.path}>
         <Link to={route.path} onClick={(e) => e.preventDefault() || e.stopPropagation() || alert(route.path)}>
-          {route.name}
+          {route.page}
           {route.routes && createNavigation(route.routes, 15)}
         </Link>
       </li>
@@ -165,4 +165,4 @@ const createNavigation = (routes, padding = 0) => (
 </Router>
 ```
 
-You can play with the same example on [codesandbox.io](https://codesandbox.io/s/yqyro6lkvx);
+You can play with the same example on [codesandbox.io](https://codesandbox.io/s/yqyro6lkvx).
