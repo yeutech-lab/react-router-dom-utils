@@ -127,8 +127,6 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
     const page = { path, ...route };
     // set a list of aliases
     const pageAliasList = pageAliases instanceof Array ? pageAliases : [pageAliases].filter((f) => f);
-    // dotted string to traverse object
-    let pageDepth = '';
     // routes without path can be redirection or nested route config case
     if (path) {
       // convert the path into dotted camel case
@@ -137,25 +135,26 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
       camelCasePathList.forEach((onePathDepth, i) => {
         // this is special case to map homepage
         if (path === home.path) {
-          // default to home if no page alias are set
           if (!pageAliasList.length) {
+            // default page name if no page alias are set
             getMergeSet(pages, home.page, page);
           } else {
+            // otherwise skip the default and use page aliases directly
             pageAliasList.forEach((depth) => {
               getMergeSet(pages, depth, page);
             });
           }
-        } else if (!pageDepth.length && i === camelCasePathList.length - 1) {
+        } else if (i === 0 && i === camelCasePathList.length - 1) {
+          // for root path, create the page
           [onePathDepth, ...pageAliasList].filter((f) => f).forEach((depth) => getMergeSet(pages, depth, page));
-        } else if (pageDepth.length && i === camelCasePathList.length - 1) {
+        } else if (i > 0 && i === camelCasePathList.length - 1) {
+          // for non root path, create the page
           const targetList = [camelCasePath, ...pageAliasList].filter((f) => f);
           targetList.forEach((target) => getMergeSet(pages, target, page));
-        } else {
-          pageDepth = pageDepth.length === 0 ? onePathDepth : `${pageDepth}.${onePathDepth}`;
         }
       });
     }
-    // this support routes configuration nesting
+    // support nested routes configuration
     routeUnfiltered[childKey] && getPages(routeUnfiltered[childKey], pages, childKey); // eslint-disable-line no-unused-expressions
   });
   return pages;
