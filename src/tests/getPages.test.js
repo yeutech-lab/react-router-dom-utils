@@ -276,4 +276,49 @@ describe('getPages', () => {
       },
     });
   });
+
+  it('should remove duplicate', () => {
+    const routesConfig = [
+      {
+        path: '/auth',
+        role: 1,
+      },
+      {
+        path: '/users',
+      },
+      {
+        path: '/user-management',
+      },
+      {
+        path: '/users',
+        exact: true,
+        routes: [
+          {
+            page: 'users.userEdit',
+            path: '/users/:id',
+          },
+        ],
+      },
+    ];
+    const p = getPages(routesConfig);
+    expect(p).toEqual({
+      auth: {
+        path: '/auth',
+        role: 1,
+      },
+      userManagement: {
+        path: '/user-management',
+      },
+      users: {
+        exact: true,
+        path: '/users',
+        $id: {
+          path: '/users/:id',
+        },
+        userEdit: {
+          path: '/users/:id',
+        },
+      },
+    });
+  });
 });
