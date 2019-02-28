@@ -1,3 +1,10 @@
+## [2.2.5](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.4...v2.2.5) (2019-02-28)
+
+
+### Bug Fixes
+
+* **getPages:** fixing bug for root paths ([32a878d](https://github.com/yeutech-lab/react-router-dom-utils/commit/32a878d))
+
 ## [2.2.4](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.3...v2.2.4) (2019-02-28)
 
 
