@@ -125,26 +125,20 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
     if (path) {
       const camelCasePath = camelizePath(path);
       const camelCasePathList = camelCasePath.split('.');
-
       camelCasePathList.forEach((onePathDepth, i) => {
-        if (path === home.path && !pageAliasList.length) {
-          const value = get(pages, home.page) || {};
-          set(pages, home.page, merge(value, page));
-        } else if (path === home.path) {
-          pageAliasList.forEach((alias) => {
-            const value = get(pages, alias) || {};
-            set(pages, alias, merge(value, page));
-          });
+        if (path === home.path) {
+          if (pageAliasList.length) {
+            pageAliasList.forEach((depth) => {
+              getMergeSet(pages, depth, page);
+            });
+          } else {
+            getMergeSet(pages, home.page, page);
+          }
+        } else if (!pageDepth.length && i === camelCasePathList.length - 1) {
+          [onePathDepth, pageAliasList].filter((f) => f).forEach((depth) => getMergeSet(pages, depth, page));
         } else if (pageDepth.length && i === camelCasePathList.length - 1) {
           const targetList = [camelCasePath].concat(pageAliasList).filter((f) => f);
-          targetList.forEach((target) => {
-            if (target.includes('.')) {
-              const value = get(pages, target) || {};
-              set(pages, target, merge(value, page));
-            } else {
-              Object.assign(pages, merge({ [target]: page }, pages[target] || {}));
-            }
-          });
+          targetList.forEach((target) => getMergeSet(pages, target, page));
         } else {
           pageDepth = pageDepth.length === 0 ? onePathDepth : `${pageDepth}.${onePathDepth}`;
         }
@@ -152,6 +146,22 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
     }
     routeUnfiltered[childKey] && getPages(routeUnfiltered[childKey], pages, childKey); // eslint-disable-line no-unused-expressions
   });
-
   return pages;
+}
+
+/**
+ * @private
+ * @description
+ * Traverse get merge and set a value within an object
+ * @param {object} object - object to use
+ * @param {string} path - The path to get and set
+ * @param {string} value - The value to merge and set
+ */
+function getMergeSet(object, path, value) {
+  if (path.includes('.')) {
+    const val = get(object, path) || {};
+    set(object, path, merge(val, value));
+  } else {
+    Object.assign(object, merge({ [path]: value }, object[path] || {}));
+  }
 }

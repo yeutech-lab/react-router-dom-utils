@@ -75,12 +75,16 @@ describe('getPages', () => {
       path: '/hello/world/2017',
     },
     hello: {
+      path: '/hello',
       world: {
         2017: {
           path: '/hello/world/2017',
         },
         path: '/hello/world',
       },
+    },
+    myHello: {
+      path: '/hello',
     },
     myWorld: {
       path: '/hello/world',
@@ -102,6 +106,7 @@ describe('getPages', () => {
       },
     },
     bye: {
+      path: '/bye',
       forest: {
         path: '/bye/forest',
         gump: {
@@ -111,6 +116,9 @@ describe('getPages', () => {
           path: '/bye/forest/gump',
         },
       },
+    },
+    myBye: {
+      path: '/bye',
     },
     myByeForest: {
       path: '/bye/forest',
@@ -156,7 +164,6 @@ describe('getPages', () => {
     });
   });
 });
-
 describe('getPages', () => {
   it('should succeed all kind of merge', () => {
     const routes = [{
@@ -235,5 +242,16 @@ describe('getPages', () => {
     expect(p.users.$id.path).toEqual('/users/:id');
     expect(p.users.edit.path).toEqual('/users/:id');
     expect(p.dashboard.userEdit.path).toEqual('/users/:id');
+  });
+
+  it('should work', () => {
+    const routesConfig = [
+      {
+        path: '/test',
+        role: 10,
+      },
+    ];
+    const p = getPages(routesConfig);
+    expect(p.test.path).toEqual('/test');
   });
 });
