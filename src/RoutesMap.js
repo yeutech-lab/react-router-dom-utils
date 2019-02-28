@@ -23,7 +23,7 @@
  * <pre>
  *   routesMap.get('/users/1'):
  *
- *   JSON.stringify(editUser, null, 2)
+ *   {JSON.stringify(editUser, null, 2)}
  * </pre>
  */
 export default class RoutesMap extends Map {
