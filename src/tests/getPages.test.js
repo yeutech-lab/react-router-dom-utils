@@ -71,18 +71,34 @@ describe('getPages', () => {
       }],
     }];
   const expectedPages = {
+    2017: {
+      path: '/hello/world/2017',
+    },
     hello: {
       world: {
         2017: {
           path: '/hello/world/2017',
         },
         path: '/hello/world',
-        'two-thousand-seventeen': {
-          path: '/hello/world/2017',
-        },
       },
-      myWorld: {
-        path: '/hello/world',
+    },
+    myWorld: {
+      path: '/hello/world',
+    },
+    'two-thousand-seventeen': {
+      path: '/hello/world/2017',
+    },
+    toRoot: {
+      'two-thousand-seventeen': {
+        path: '/hello/world/2017',
+      },
+      my1337: {
+        path: '/bye/forest/gump/1337',
+      },
+    },
+    homepage: {
+      resource: {
+        path: 'homepage/resource',
       },
     },
     bye: {
@@ -94,26 +110,13 @@ describe('getPages', () => {
           },
           path: '/bye/forest/gump',
         },
-        myGump: {
-          path: '/bye/forest/gump',
-        },
-      },
-      myByeForest: {
-        path: '/bye/forest',
       },
     },
-    homepage: {
-      resource: {
-        path: 'homepage/resource',
-      },
+    myByeForest: {
+      path: '/bye/forest',
     },
-    toRoot: {
-      my1337: {
-        path: '/bye/forest/gump/1337',
-      },
-      'two-thousand-seventeen': {
-        path: '/hello/world/2017',
-      },
+    myGump: {
+      path: '/bye/forest/gump',
     },
   };
 
@@ -162,7 +165,7 @@ describe('getPages', () => {
       routes: [
         // authority
         {
-          page: 'authoritiesShow',
+          page: 'userManagement.authoritiesShow',
           path: '/user-management/:resource/:id/authorities/show',
         },
         {
@@ -183,19 +186,16 @@ describe('getPages', () => {
     }];
     const expectedPages = {
       userManagement: {
+        authoritiesShow: {
+          path: '/user-management/:resource/:id/authorities/show',
+        },
         $resource: {
           $id: {
             authorities: {
-              authoritiesShow: {
-                path: '/user-management/:resource/:id/authorities/show',
-              },
               path: '/user-management/:resource/:id/authorities',
               show: {
                 path: '/user-management/:resource/:id/authorities/show',
               },
-            },
-            authoritiesEdit: {
-              path: '/user-management/:resource/:id/authorities',
             },
           },
         },
@@ -212,8 +212,28 @@ describe('getPages', () => {
           path: '/user-management/users',
         },
       },
+      authoritiesEdit: {
+        path: '/user-management/:resource/:id/authorities',
+      },
     };
     expect(getPages(routes)).toEqual(expectedPages);
     expect(getPages(getRoutesMap(routes))).toEqual(expectedPages);
+  });
+
+  it('should work', () => {
+    const routesConfig = [{
+      path: '/',
+      page: 'dashboard',
+    }, {
+      path: '/users',
+      routes: [{
+        page: ['users.edit', 'dashboard.userEdit'],
+        path: '/users/:id',
+      }],
+    }];
+    const p = getPages(routesConfig);
+    expect(p.users.$id.path).toEqual('/users/:id');
+    expect(p.users.edit.path).toEqual('/users/:id');
+    expect(p.dashboard.userEdit.path).toEqual('/users/:id');
   });
 });

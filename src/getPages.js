@@ -42,21 +42,23 @@ const defaultOptions = {
  * It also read for `route.page` to create page aliases.
  * It is recommended to inject `pages` into the application context so Link component can quickly access it..
 
- *```javascript
+ *```js
  * const routesConfig = [{ path: '/', component: Dashboard, page: 'dashboard' }, { path: '/users', component: UserList }];
  * const pages = getPages(routesConfig);
- * // { dashboard: { path: '/' }, users: { path: '/users' } }
- *
- * // This also work with routes map
- * getPages(getRoutesMap(routesConfig));
- * // { dashboard: { path: '/' }, users: { path: '/users' } }
+ * const pages2 = getPages(getRoutesMap(routesConfig));
+ * <div>
+ *  <h2>It work with routes config</h2>
+ *  <pre>{JSON.stringify(pages, null, 2)}</pre>
+ *  <h2>It work with routes map</h2>
+ *  <pre>{JSON.stringify(pages2, null, 2)}</pre>
+ * </div>
  * ```
  *
- * _Params_
+ * Params
  *
  * `path` with params such as `/users/:id` will be added to `pages` with the colon replaced with the dollar sign: `pages.users.$id`.
  *
- * ```javascript
+ * ```js
  * const routesConfig = [{
  *  path: '/users',
  *  component: UserList,
@@ -66,20 +68,17 @@ const defaultOptions = {
  *  }],
  * }];
  * const pages = getPages(routesConfig);
- * pages.users.$id.path
- * // /users/:id
+ * <pre>pages.users.$id.path: {pages.users.$id.path}</pre>
  * ```
  *
- * _Aliases:_
+ * Aliases:
  *
  * It is possible to create an alias of any page using `route.page`.
  *
- * `{string|array} route.page` - An array or a string to create alias.
- * It cannot use dot (`.`) in their name unless you want to add the alias at the root of the `pages` object,
- * in this case it will use the dot to traverse the object and set the value.
+ * `{string|array} route.page` - An array of string camelCase dotted separated key that indicate where to set the alias from the root of pages.
  *
  *
- * ```javascript
+ * ```js
  * const routesConfig = [{
  *   path: '/',
  *   component: Dashboard,
@@ -88,25 +87,20 @@ const defaultOptions = {
  *  path: '/users',
  *  component: UserList,
  *  routes: [{
- *    alias: ['edit', 'dashboard.userEdit'],
+ *    page: ['users.edit', 'dashboard.userEdit'],
  *    path: '/users/:id',
  *    component: UserEdit,
  *  }],
  * }];
  * const pages = getPages(routesConfig);
- *
- * // use the generated key
- * pages.users.$id.path
- * // /users/:id
- *
- * // or use the aliased one
- * pages.users.edit.path
- * // /users/:id
- *
- *
- * // or use an alias from root of pages
- * pages.dashboard.userEdit.path
- * // /users/:id
+ * <div>
+ *   <h2>use the generated key: pages.users.$id.path</h2>
+ *   <pre>{pages.users.$id.path}</pre>
+ *   <h2>or use the aliased one: pages.users.edit.path</h2>
+ *   <pre>{pages.users.edit.path}</pre>
+ *   <h2>or use an alias from root of pages: pages.dashboard.userEdit.path</h2>
+ *   <pre>{pages.dashboard.userEdit.path}</pre>
+ * </div>
  * ```
  *
  * > The base path `/` will be added to `pages` as `home` if no `page` alias exist for it.
@@ -148,8 +142,7 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
               const value = get(pages, target) || {};
               set(pages, target, merge(value, page));
             } else {
-              const value = get(pages, `${pageDepth}.${target}`) || {};
-              set(pages, `${pageDepth}.${target}`, merge(value, page));
+              Object.assign(pages, merge({ [target]: page }, pages[target] || {}));
             }
           });
         } else {
