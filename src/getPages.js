@@ -173,6 +173,6 @@ function getMergeSet(object, path, value) {
     const val = get(object, path) || {};
     set(object, path, merge(val, value));
   } else {
-    Object.assign(object, merge(object[path] || {}, { [path]: value }));
+    Object.assign(object, merge(object, { [path]: value }));
   }
 }
