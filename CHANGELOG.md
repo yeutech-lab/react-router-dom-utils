@@ -1,3 +1,10 @@
+## [2.2.4](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.3...v2.2.4) (2019-02-28)
+
+
+### Bug Fixes
+
+* **documentation:** fixed example in documentation ([1a17607](https://github.com/yeutech-lab/react-router-dom-utils/commit/1a17607))
+
 ## [2.2.3](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.2...v2.2.3) (2019-02-27)
 
 
