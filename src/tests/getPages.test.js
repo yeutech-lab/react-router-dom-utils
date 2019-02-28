@@ -254,4 +254,26 @@ describe('getPages', () => {
     const p = getPages(routesConfig);
     expect(p.test.path).toEqual('/test');
   });
+
+  it('should work', () => {
+    const routesConfig = [
+      {
+        path: '/auth',
+        role: 1,
+      },
+      {
+        path: '/users',
+      },
+    ];
+    const p = getPages(routesConfig);
+    expect(p).toEqual({
+      auth: {
+        path: '/auth',
+        role: 1,
+      },
+      users: {
+        path: '/users',
+      },
+    });
+  });
 });

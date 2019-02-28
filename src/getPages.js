@@ -114,36 +114,47 @@ const defaultOptions = {
  * @return {object} pages - The pages of your applications
  */
 export default function getPages(routesConfig, pages = {}, options = defaultOptions) {
+  // options
   const { filters, childKey, home } = { ...defaultOptions, ...options };
+  // define input mode
   const isRoutesMap = routesConfig instanceof Map;
   [...routesConfig].forEach((routeOrMap) => {
+    // choose from input mode
     const routeUnfiltered = isRoutesMap ? routeOrMap[1] : routeOrMap;
+    // retrieve page information
     const { path, page: pageAliases, ...route } = omit(routeUnfiltered, filters);
+    // set the page content
     const page = { path, ...route };
+    // set a list of aliases
     const pageAliasList = pageAliases instanceof Array ? pageAliases : [pageAliases].filter((f) => f);
-    let pageDepth = '';
+    // routes without path can be redirection or nested route config case
     if (path) {
+      // convert the path into dotted camel case
       const camelCasePath = camelizePath(path);
       const camelCasePathList = camelCasePath.split('.');
       camelCasePathList.forEach((onePathDepth, i) => {
+        // this is special case to map homepage
         if (path === home.path) {
-          if (pageAliasList.length) {
+          if (!pageAliasList.length) {
+            // default page name if no page alias are set
+            getMergeSet(pages, home.page, page);
+          } else {
+            // otherwise skip the default and use page aliases directly
             pageAliasList.forEach((depth) => {
               getMergeSet(pages, depth, page);
             });
-          } else {
-            getMergeSet(pages, home.page, page);
           }
-        } else if (!pageDepth.length && i === camelCasePathList.length - 1) {
-          [onePathDepth, pageAliasList].filter((f) => f).forEach((depth) => getMergeSet(pages, depth, page));
-        } else if (pageDepth.length && i === camelCasePathList.length - 1) {
-          const targetList = [camelCasePath].concat(pageAliasList).filter((f) => f);
+        } else if (i === 0 && i === camelCasePathList.length - 1) {
+          // for root path, create the page
+          [onePathDepth, ...pageAliasList].filter((f) => f).forEach((depth) => getMergeSet(pages, depth, page));
+        } else if (i > 0 && i === camelCasePathList.length - 1) {
+          // for non root path, create the page
+          const targetList = [camelCasePath, ...pageAliasList].filter((f) => f);
           targetList.forEach((target) => getMergeSet(pages, target, page));
-        } else {
-          pageDepth = pageDepth.length === 0 ? onePathDepth : `${pageDepth}.${onePathDepth}`;
         }
       });
     }
+    // support nested routes configuration
     routeUnfiltered[childKey] && getPages(routeUnfiltered[childKey], pages, childKey); // eslint-disable-line no-unused-expressions
   });
   return pages;
@@ -155,13 +166,13 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
  * Traverse get merge and set a value within an object
  * @param {object} object - object to use
  * @param {string} path - The path to get and set
- * @param {string} value - The value to merge and set
+ * @param {*} value - The value to merge and set
  */
 function getMergeSet(object, path, value) {
   if (path.includes('.')) {
     const val = get(object, path) || {};
     set(object, path, merge(val, value));
   } else {
-    Object.assign(object, merge({ [path]: value }, object[path] || {}));
+    Object.assign(object, merge(object[path] || {}, { [path]: value }));
   }
 }
