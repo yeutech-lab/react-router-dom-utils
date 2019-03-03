@@ -124,7 +124,9 @@ export const defaultOptions = {
  */
 export default function getPages(routesConfig, pages = {}, options = defaultOptions) {
   // options
-  const { extensions, filters, childKey, home } = { ...defaultOptions, ...options };
+  const {
+    extensions, filters, childKey, home,
+  } = { ...defaultOptions, ...options };
   // define input mode
   const isRoutesMap = routesConfig instanceof Map;
   [...routesConfig].forEach((routeOrMap) => {

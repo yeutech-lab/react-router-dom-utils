@@ -1,5 +1,5 @@
 import React from 'react';
-import getPages, { defaultOptions } from '../getPages';
+import getPages from '../getPages';
 import getRoutesMap from '../getRoutesMap';
 
 describe('getPages homepage with /', () => {
