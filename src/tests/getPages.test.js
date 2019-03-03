@@ -1,5 +1,5 @@
 import React from 'react';
-import getPages from '../getPages';
+import getPages, { defaultOptions } from '../getPages';
 import getRoutesMap from '../getRoutesMap';
 
 describe('getPages homepage with /', () => {
@@ -318,6 +318,49 @@ describe('getPages', () => {
         userEdit: {
           path: '/users/:id',
         },
+      },
+    });
+  });
+
+  it('should remove extensions', () => {
+    const routesConfig = [
+      {
+        path: '/auth.html',
+        role: 1,
+      },
+      {
+        path: '/users.htm',
+      },
+    ];
+    const p = getPages(routesConfig);
+    expect(p).toEqual({
+      auth: {
+        path: '/auth.html',
+        role: 1,
+      },
+      usersHtm: {
+        path: '/users.htm',
+      },
+    });
+  });
+  it('should not remove extensions', () => {
+    const routesConfig = [
+      {
+        path: '/auth.html',
+        role: 1,
+      },
+      {
+        path: '/users.htm',
+      },
+    ];
+    const p2 = getPages(routesConfig, undefined, { extensions: [] });
+    expect(p2).toEqual({
+      authHtml: {
+        path: '/auth.html',
+        role: 1,
+      },
+      usersHtm: {
+        path: '/users.htm',
       },
     });
   });

@@ -15,17 +15,25 @@ import omit from 'lodash.omit';
  * camelizePath('/users/all');
  * // users.all
  * @param {string} path - A valid react router path
+ * @param {array} [extensions=[]] - A list of extensions that will be remove when camel casing the path
  * @return {string} camelizePath - a camel case dotted string representation of the path
  */
-export function camelizePath(path) {
+export function camelizePath(path, extensions = []) {
   return (path[0] === '/' ? path.slice(1) : path)
     .split('/')
-    .map((p) => (p[0] === ':' ? `$${camelcase(p.slice(1))}` : camelcase(p)))
+    .map((p) => {
+      let part = p;
+      extensions.forEach((ext) => {
+        part = part.replace(new RegExp(ext, 'g'), '');
+      });
+      return (part[0] === ':' ? `$${camelcase(part.slice(1))}` : camelcase(part));
+    })
     .join('.');
 }
 
 /** This will be default options applied in getPages */
-const defaultOptions = {
+export const defaultOptions = {
+  extensions: ['.html'],
   filters: ['component', 'routes'],
   childKey: 'routes',
   home: {
@@ -108,6 +116,7 @@ const defaultOptions = {
  * @param {Object[]|RoutesMap|Map} routesConfig or routesMap - An array of routes configuration object or a routes map that will be translated into pages
  * @param {object} [pages={}] - A pages object
  * @param {object} options - An options object for the getPages
+ * @param {array} [options.extensions=['.html']] - A list of extensions that will be removed before converting path to camel case name
  * @param {array} [options.filters=['component', 'routes']] - Keys listed here will be omitted in page.
  * @param {string} [options.childKey=routes] - When using a list of route configuration, this will be the key used to identify the nested list of routes configuration.
  * @param {object} [options.home={ page: 'home', path: '/' }] - This will be used by default if your homepage path is `/` and if the route configuration does not set an alias for it.
@@ -115,7 +124,7 @@ const defaultOptions = {
  */
 export default function getPages(routesConfig, pages = {}, options = defaultOptions) {
   // options
-  const { filters, childKey, home } = { ...defaultOptions, ...options };
+  const { extensions, filters, childKey, home } = { ...defaultOptions, ...options };
   // define input mode
   const isRoutesMap = routesConfig instanceof Map;
   [...routesConfig].forEach((routeOrMap) => {
@@ -130,7 +139,7 @@ export default function getPages(routesConfig, pages = {}, options = defaultOpti
     // routes without path can be redirection or nested route config case
     if (path) {
       // convert the path into dotted camel case
-      const camelCasePath = camelizePath(path);
+      const camelCasePath = camelizePath(path, extensions);
       const camelCasePathList = camelCasePath.split('.');
       camelCasePathList.forEach((onePathDepth, i) => {
         // this is special case to map homepage
