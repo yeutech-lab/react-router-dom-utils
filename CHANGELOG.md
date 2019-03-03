@@ -1,3 +1,10 @@
+## [2.2.8](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.7...v2.2.8) (2019-03-03)
+
+
+### Bug Fixes
+
+* **dependencies:** upgrade all dependencies ([ca5a307](https://github.com/yeutech-lab/react-router-dom-utils/commit/ca5a307))
+
 ## [2.2.7](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.6...v2.2.7) (2019-02-28)
 
 
