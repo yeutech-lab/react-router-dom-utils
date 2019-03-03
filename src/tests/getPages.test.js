@@ -321,4 +321,47 @@ describe('getPages', () => {
       },
     });
   });
+
+  it('should remove extensions', () => {
+    const routesConfig = [
+      {
+        path: '/auth.html',
+        role: 1,
+      },
+      {
+        path: '/users.htm',
+      },
+    ];
+    const p = getPages(routesConfig);
+    expect(p).toEqual({
+      auth: {
+        path: '/auth.html',
+        role: 1,
+      },
+      usersHtm: {
+        path: '/users.htm',
+      },
+    });
+  });
+  it('should not remove extensions', () => {
+    const routesConfig = [
+      {
+        path: '/auth.html',
+        role: 1,
+      },
+      {
+        path: '/users.htm',
+      },
+    ];
+    const p2 = getPages(routesConfig, undefined, { extensions: [] });
+    expect(p2).toEqual({
+      authHtml: {
+        path: '/auth.html',
+        role: 1,
+      },
+      usersHtm: {
+        path: '/users.htm',
+      },
+    });
+  });
 });
