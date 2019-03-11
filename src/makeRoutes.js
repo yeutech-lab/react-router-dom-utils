@@ -6,7 +6,7 @@ import React from 'react';
  * @description This utility will check for routes configurations
  *
  * ```js
- * const { makeRoutes } = require('$PACKAGE_NAME/lib');
+ * import { makeRoutes } from '$PACKAGE_NAME';
  * const Routes = makeRoutes([{ name: 'home', path: '/home', component: () => <div>Home page</div> }]);
  * <div>{Routes[0].props.name} is <code>home</code></div>;
  * ```

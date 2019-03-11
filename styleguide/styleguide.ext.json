@@ -27,19 +27,19 @@
         {
           "name": "Motivation",
           "content": "docs/motivation.md"
-        },
-        {
-          "name": "UI Component",
-          "components": [
-            "src/**/[A-Z]*.js",
-            "src/**/[A-Z]*/index.js"
-          ]
-        },
-        {
-          "name": "Utilities",
-          "content": "docs/js/jsdoc.md"
         }
       ]
+    },
+    {
+      "name": "UI Component",
+      "components": [
+        "src/**/[A-Z]*.js",
+        "src/**/[A-Z]*/index.js"
+      ]
+    },
+    {
+      "name": "Utilities",
+      "content": "docs/js/jsdoc.md"
     },
     {
       "name": "Contribute",

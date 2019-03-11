@@ -5,18 +5,19 @@
 This utility convert a path to a camelCase dotted string.
 Every parameter within the path will see the colon replaced with a dollar sign.
 
+```js
+import { camelizePath } from '$PACKAGE_NAME';
+const standard = camelizePath('/users/all');
+// users.all
+const withParams = camelizePath('users/:id');
+// users.$id
+<pre>{JSON.stringify({ standard, withParams }, null, 2)}</pre>
+```
+
 ### Parameters
 
 -   `path` **[string][1]** A valid react router path
-
-### Examples
-
-```javascript
-camelizePath('users/:id');
-// users.$id
-camelizePath('/users/all');
-// users.all
-```
+-   `extensions` **[array][2]** A list of extensions that will be remove when camel casing the path (optional, default `[]`)
 
 Returns **[string][1]** camelizePath - a camel case dotted string representation of the path
 
@@ -71,7 +72,7 @@ const routesConfig = [{
  path: '/users',
  component: UserList,
  routes: [{
-   alias: ['users.edit', 'dashboard.userEdit'],
+   page: ['users.edit', 'dashboard.userEdit'],
    path: '/users/:id',
    component: UserEdit,
  }],
@@ -94,6 +95,7 @@ const pages = getPages(routesConfig);
 -   `routesConfig` **([Array][2]&lt;[Object][3]> | [RoutesMap][4] \| [Map][5])** or routesMap - An array of routes configuration object or a routes map that will be translated into pages
 -   `pages` **[object][3]** A pages object (optional, default `{}`)
 -   `options` **[object][3]** An options object for the getPages (optional, default `defaultOptions`)
+    -   `options.extensions` **[array][2]** A list of extensions that will be removed before converting path to camel case name (optional, default `['.html']`)
     -   `options.filters` **[array][2]** Keys listed here will be omitted in page. (optional, default `['component','routes']`)
     -   `options.childKey` **[string][1]** When using a list of route configuration, this will be the key used to identify the nested list of routes configuration. (optional, default `routes`)
     -   `options.home` **[object][3]** This will be used by default if your homepage path is `/` and if the route configuration does not set an alias for it. (optional, default `{page:'home',path:'/'}`)
@@ -134,7 +136,7 @@ Returns **[RoutesMap][4]&lt;[string][1], [object][3]>** The routeMap object used
 This utility will check for routes configurations
 
 ```js
-const { makeRoutes } = require('$PACKAGE_NAME/lib');
+import { makeRoutes } from '$PACKAGE_NAME';
 const Routes = makeRoutes([{ name: 'home', path: '/home', component: () => <div>Home page</div> }]);
 <div>{Routes[0].props.name} is <code>home</code></div>;
 ```
@@ -158,7 +160,7 @@ Returns **[Array][2]** routeList - list of <Route /> and <Redirect />
 It will return true if the first path match the second path with params
 
 ```js
-const { matchParamsPath } = require('$PACKAGE_NAME/lib');
+import { matchParamsPath } from '$PACKAGE_NAME/lib';
 <div>matchParamsPath('/users/1', '/users/:id'): {matchParamsPath('/users/1', '/users/:id').toString()}</div>;
 ```
 
@@ -189,7 +191,7 @@ Be aware that the `has` method will still check for the exact match.
 See: [https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map/get][8]
 
 ```js
-const { RoutesMap } = require('$PACKAGE_NAME');
+import { RoutesMap } from '$PACKAGE_NAME';
 const routesMap = new RoutesMap([
  ['/', { name: 'Home' }],
  ['/users/:id', { name: 'EditUser' }],
