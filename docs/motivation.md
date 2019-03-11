@@ -27,7 +27,7 @@ Read available props :
 We use `getPages` utility to turn the `routeList` configuration into a `pages` object that can be traversed more efficiently than the array when writing links.
 
 ```js
-const { getPages } = require('$PACKAGE_NAME');
+import { getPages } from '$PACKAGE_NAME';
 
 // routes configuration
 const routes = [{
@@ -57,7 +57,7 @@ The flat architecture of the map and it's unique id makes it easier to find, upd
 To get a `routesMap`, just pass the array of route configuration to `getRoutesMap` function:
 
 ```js
-const { getRoutesMap } = require('$PACKAGE_NAME');
+import { getRoutesMap } from '$PACKAGE_NAME';
 
 // routes configuration
 const routes = [{

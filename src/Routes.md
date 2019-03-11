@@ -62,11 +62,11 @@ const routes = [
 **Example**
 
 ```js
-const {
+import {
   Switch,
-  BrowserRouter: Router,
+  BrowserRouter as Router,
   Link,
-} = require('react-router-dom');
+} from 'react-router-dom';
 
 const routes = [
   {

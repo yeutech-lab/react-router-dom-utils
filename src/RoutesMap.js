@@ -8,7 +8,7 @@
  * See: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map/get
  *
  * ```js
- * const { RoutesMap } = require('$PACKAGE_NAME');
+ * import { RoutesMap } from '$PACKAGE_NAME';
  * const routesMap = new RoutesMap([
  *  ['/', { name: 'Home' }],
  *  ['/users/:id', { name: 'EditUser' }],

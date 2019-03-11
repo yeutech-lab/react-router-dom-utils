@@ -9,11 +9,16 @@ import omit from 'lodash.omit';
  * @description
  * This utility convert a path to a camelCase dotted string.
  * Every parameter within the path will see the colon replaced with a dollar sign.
- * @example
- * camelizePath('users/:id');
- * // users.$id
- * camelizePath('/users/all');
+ *
+ * ```js
+ * import { camelizePath } from '$PACKAGE_NAME';
+ * const standard = camelizePath('/users/all');
  * // users.all
+ * const withParams = camelizePath('users/:id');
+ * // users.$id
+ * <pre>{JSON.stringify({ standard, withParams }, null, 2)}</pre>
+ * ```
+ *
  * @param {string} path - A valid react router path
  * @param {array} [extensions=[]] - A list of extensions that will be remove when camel casing the path
  * @return {string} camelizePath - a camel case dotted string representation of the path
