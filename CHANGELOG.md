@@ -1,3 +1,10 @@
+## [2.2.9](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.8...v2.2.9) (2019-03-11)
+
+
+### Bug Fixes
+
+* **documentation:** update @rollup-umd/documentation, @yeutech-lab/documentation. Using es6 import for all examples ([5997f36](https://github.com/yeutech-lab/react-router-dom-utils/commit/5997f36))
+
 ## [2.2.8](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.7...v2.2.8) (2019-03-03)
 
 

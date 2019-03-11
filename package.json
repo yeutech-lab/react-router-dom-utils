@@ -1,6 +1,6 @@
 {
   "name": "@yeutech-lab/react-router-dom-utils",
-  "version": "2.2.8",
+  "version": "2.2.9",
   "description": "Utilities for web applications that use react-router-dom",
   "main": "lib/index.js",
   "jsnext:main": "dist/@yeutech-lab/react-router-dom-utils.esm.js",
