@@ -9,7 +9,7 @@ const {
   RoutesMap,
   Link,
 } = require('../src');
-require('core-js/es6');
+require('core-js/es');
 
 global.TreeOps = TreeOps;
 global.Dashboard = () => <div>dashboard</div>;

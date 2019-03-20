@@ -160,7 +160,7 @@ Returns **[Array][2]** routeList - list of <Route /> and <Redirect />
 It will return true if the first path match the second path with params
 
 ```js
-import { matchParamsPath } from '$PACKAGE_NAME/lib';
+import { matchParamsPath } from '$PACKAGE_NAME';
 <div>matchParamsPath('/users/1', '/users/:id'): {matchParamsPath('/users/1', '/users/:id').toString()}</div>;
 ```
 

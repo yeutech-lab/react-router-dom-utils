@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withRouter from 'react-router-dom/withRouter';
+import { withRouter } from 'react-router-dom';
 import makeRoutes from './makeRoutes';
 import matchParamsPath from './matchParamsPath';
 
