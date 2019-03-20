@@ -1,9 +1,10 @@
-import 'core-js/es6/map';
-import 'core-js/fn/symbol/for';
+import 'core-js/es/map';
+import 'core-js/features/symbol/for';
 import merge from 'deepmerge';
 import TreeOps from '@yeutech-lab/tree-operations';
 import RoutesMap from './RoutesMap';
 const defaultOptions = { soft: false, childKey: 'routes' };
+
 /**
  * @public
  * @description
