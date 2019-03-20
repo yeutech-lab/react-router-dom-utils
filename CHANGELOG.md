@@ -1,3 +1,16 @@
+# [3.0.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.9...v3.0.0) (2019-03-20)
+
+
+### Bug Fixes
+
+* **dependencies:** Upgrade all dependencies ([dd7e733](https://github.com/yeutech-lab/react-router-dom-utils/commit/dd7e733))
+
+
+### BREAKING CHANGES
+
+* **dependencies:** corejs was ugprade to v3.0.0 and babel to 7.4.0. The api of corejs has changed and
+is tightly coupled to babel 7.4.0
+
 ## [2.2.9](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.8...v2.2.9) (2019-03-11)
 
 
