@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v3.0.0...v3.0.1) (2019-03-21)
+
+
+### Bug Fixes
+
+* **dependencies:** upgrade all dependencies ([29baa05](https://github.com/yeutech-lab/react-router-dom-utils/commit/29baa05))
+
 # [3.0.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v2.2.9...v3.0.0) (2019-03-20)
 
 
