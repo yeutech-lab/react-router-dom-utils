@@ -219,10 +219,10 @@
     "raf": "^3.4.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.8.4",
-    "rollup": "^1.6.0",
+    "rollup": "^1.7.0",
     "semantic-release": "^15.13.3",
     "toctoc": "^0.3.2",
     "webpack": "^4.29.6"
@@ -239,9 +239,9 @@
     "prop-types": "^15.7.2"
   },
   "peerDependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-router-dom": "^4.3.1 || ^5.0.0"
+    "react": "^16.0.0.",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2 || ^5.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
