@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import makeRoutes from './makeRoutes';
 
@@ -9,7 +9,7 @@ import makeRoutes from './makeRoutes';
  * @returns {Route[]}
  * @constructor
  */
-const Routes = ({ routes }) => <Fragment>{makeRoutes(routes)}</Fragment>;
+const Routes = ({ routes }) => <>{makeRoutes(routes)}</>;
 
 Routes.propTypes = {
   /** An array of routes configuration object or a routes Map */

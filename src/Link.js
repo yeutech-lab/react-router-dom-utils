@@ -122,7 +122,8 @@ class Link extends React.Component {
     ContextConsumer: null,
   };
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     const { routes, routesMap, ContextConsumer } = this.props;
     if ((routes.length || routesMap.size) && ContextConsumer && process.env.NODE_ENV !== 'production') {
       // eslint-disable-next-line no-console
