@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v3.0.2...v3.1.0) (2020-02-08)
+
+
+### Features
+
+* **Link:** allow a different engine to navigate than react-router using push props. Update all dependencies ([277df22](https://github.com/yeutech-lab/react-router-dom-utils/commit/277df2244c764558ee705ee7d1c135002087f9fe))
+
 ## [3.0.2](https://github.com/yeutech-lab/react-router-dom-utils/compare/v3.0.1...v3.0.2) (2020-01-14)
 
 
