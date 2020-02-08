@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import makeRoutes from './makeRoutes';
-import matchParamsPath from './matchParamsPath';
+import makeRoutes from '../makeRoutes';
+import matchParamsPath from '../matchParamsPath';
 
 /**
  * @name Link
@@ -37,8 +36,44 @@ import matchParamsPath from './matchParamsPath';
  * );
  * ```
  *
+ * @example
+ *
+ * Then call that link in your application:
+ *
+ * ```javascript
+ * <Link to={pages.home.path}>Home</Link>
+ * ```
+ *
+ * @example
+ * It can work with any navigation engine, if you don't want the Link to detect react-router from the context, just pass the props `push` with the navigate function:
+ * If you want to preload the page, `to` and `routesMap` (already created in the application Link.js) are necessary
+ * ```javascript
+ * <Link to={pages.home.path} push={() => navigate('home')} />
+ * ```
+ *
+ * @example
+ *
+ * It can also work with react-native, but since they use `onPress` massively instead of `onClick`, you need to remap the props to `onClick` before:
+ *
+ * ```javascript
+ * // remap onClick to onPress
+ * const Button = ({
+ *  t,
+ *  onClick,
+ *  onPress,
+ *  ...rest
+ * }) => (
+ *  <ButtonDefault
+ *    mode="contained"
+ *    onPress={onClick || onPress}
+ *    {...rest}
+ *  />
+ * );
+ * ```
+ *
+ * Then pass this component, for example `<Link tag={Button} />`
  */
-class Link extends React.Component {
+export default class Link extends React.Component {
   static propTypes = {
     /** The path the link will go to */
     to: PropTypes.string.isRequired,
@@ -99,11 +134,15 @@ class Link extends React.Component {
      */
     ContextConsumer: PropTypes.any,
     /** @ignore */
-    match: PropTypes.object.isRequired,
+    match: PropTypes.object,
     /** @ignore */
-    location: PropTypes.object.isRequired,
+    location: PropTypes.object,
     /** @ignore */
-    history: PropTypes.object.isRequired,
+    history: PropTypes.object,
+    /** If not set, it will try to use react router context, otherwise, it will skip react router and use push for triggering the page change
+     * This allow to use the link and it's features without react router
+     */
+    push: PropTypes.func,
   };
 
   static defaultProps = {
@@ -120,6 +159,10 @@ class Link extends React.Component {
     routes: [],
     routesMap: new Map(),
     ContextConsumer: null,
+    match: undefined,
+    location: undefined,
+    history: undefined,
+    push: undefined,
   };
 
   // eslint-disable-next-line camelcase
@@ -245,6 +288,7 @@ class Link extends React.Component {
   changePage = (e, path) => {
     const {
       history,
+      push,
       delay,
       onPageChange,
       onBeforePageChange,
@@ -258,7 +302,11 @@ class Link extends React.Component {
       if (onPageChange) {
         onPageChange(e);
       }
-      history.push(path);
+      if (push) {
+        push(path);
+      } else {
+        history.push(path);
+      }
     }, ms);
   };
 
@@ -308,5 +356,3 @@ class Link extends React.Component {
     );
   }
 }
-
-export default withRouter(Link);

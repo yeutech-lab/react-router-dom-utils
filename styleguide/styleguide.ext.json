@@ -33,8 +33,7 @@
     {
       "name": "UI Component",
       "components": [
-        "src/**/[A-Z]*.js",
-        "src/**/[A-Z]*/index.js"
+        "src/**/[A-Z]*.js"
       ]
     },
     {
