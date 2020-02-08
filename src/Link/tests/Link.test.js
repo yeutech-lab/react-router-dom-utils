@@ -1,9 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
-import getRoutesMap from '../getRoutesMap';
-import Link from '../Link';
+import { withRouter, MemoryRouter } from 'react-router';
+import getRoutesMap from '../../getRoutesMap';
+import RRLink from '../Link';
 
+const Link = withRouter(RRLink);
 // this will mock the loadable component
 const LoadableComponent = () => <div />;
 LoadableComponent.preload = () => ({ then: (fn) => fn && fn() });
