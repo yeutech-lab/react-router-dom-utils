@@ -1,3 +1,5 @@
+import PathToRegex from 'path-to-regex';
+
 /**
  * @public
  * @description
@@ -33,18 +35,34 @@ export default class RoutesMap extends Map {
    * @description
    * The get method can get a routes that use params using a path with params set.
    * @param key - It can get from the usual key or a routes with params such as `/users/1`
-   * @return {V} - The route configuration object of the route, or undefined if not found
+   * @return {*} - The route configuration object of the route, or undefined if not found
    */
   get(key) {
-    let match;
-    // exact match
+    const resultList = [];
     if (this.has(key)) return super.get(key);
-
-    // not exact match, need to apply logic
-    for (let route of this.keys()) { // eslint-disable-line no-restricted-syntax, prefer-const
-      const reg = new RegExp(`^${route.replace(/:[-\w.]+/g, '\\w+')}$`);
-      if (!match && reg.test(key)) match = route;
+    for (let path of this.keys()) { // eslint-disable-line no-restricted-syntax, prefer-const
+      const parser = new PathToRegex(path);
+      const result = parser.match(key);
+      if (result) {
+        resultList.push(path);
+      }
     }
-    return super.get(match);
+
+    if (resultList.length === 0) {
+      return undefined;
+    }
+    const match = super.get(resultList[0]);
+    if (resultList.length > 1) {
+      console.log(`You have multiple route that match "${key}" in your configuration
+       Please verify your configuration:
+       
+       ${JSON.stringify(resultList, null, 2)}
+       
+       We have selected the first match ${JSON.stringify(match, null, 2)}
+       
+       You can ask support by opening a new issue: https://github.com/yeutech-lab/react-router-dom-utils/issues/new 
+       `); // eslint-disable-line no-console
+    }
+    return match;
   }
 }

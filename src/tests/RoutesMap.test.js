@@ -1,7 +1,7 @@
 import RoutesMap from '../RoutesMap';
 
 describe('RoutesMap', () => {
-  it('should create a routes map', () => {
+  it.only('should create a routes map', () => {
     const routesMap = new RoutesMap([
       ['/404.html', {
         name: 'notFound',
