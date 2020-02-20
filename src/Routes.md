@@ -66,7 +66,7 @@ import {
   Switch,
   BrowserRouter as Router,
   Link,
-} from 'react-router-dom';
+} from 'react-router';
 
 const routes = [
   {

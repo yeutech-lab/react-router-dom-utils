@@ -186,13 +186,13 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
-    "@rollup-umd/documentation": "^2.0.13",
+    "@rollup-umd/documentation": "^2.1.1",
     "@rollup-umd/rollup": "^1.1.1",
     "@rollup-umd/ncu": "^1.0.9",
     "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.0.3",
-    "@semantic-release/npm": "^7.0.2",
+    "@semantic-release/npm": "^7.0.3",
     "@yeutech-lab/documentation": "^2.0.2",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^25.1.0",
@@ -224,9 +224,9 @@
     "react-dom": "^16.8.4",
     "react-router": "^5.1.2",
     "react-test-renderer": "^16.12.0",
-    "semantic-release": "^17.0.2",
+    "semantic-release": "^17.0.4",
     "toctoc": "^0.3.2",
-    "webpack": "^4.41.5"
+    "webpack": "^4.41.6"
   },
   "dependencies": {
     "@babel/runtime": "^7.8.4",

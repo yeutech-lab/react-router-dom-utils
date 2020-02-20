@@ -1,6 +1,6 @@
 import getRoutesMap from '../getRoutesMap';
 
-describe('should exports', () => {
+describe('getRoutesMap', () => {
   let routes;
   beforeEach(() => {
     routes = [{

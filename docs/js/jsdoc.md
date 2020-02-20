@@ -102,6 +102,33 @@ const pages = getPages(routesConfig);
 
 Returns **[object][3]** pages - The pages of your applications
 
+## getRouteFromPath
+
+Retrieve a end users path within routesMap
+
+> Special thanks to <a href="https://github.com/Supporterino" target="_blank">Supporterino</a> for this function
+
+```js
+import { RoutesMap, getRouteFromPath } from '$PACKAGE_NAME';
+const routesMap = new RoutesMap([
+ ['/', { name: 'Home' }],
+ ['/users/:id.html', { name: 'ViewUser' }],
+ ['/users/:userId/items/:id/view.html', { name: 'ViewUserItem' }],
+]);
+
+<div>
+  {JSON.stringify(getRouteFromPath('/users/1.html', routesMap))}
+  {JSON.stringify(getRouteFromPath('/users/2/items/10/view.html', routesMap))}
+</div>
+```
+
+### Parameters
+
+-   `path` **[string][1]** the path to find
+-   `routesMap` **[Map][5]** the route map
+
+Returns **[object][3]** route - the route object
+
 ## getRoutesMap
 
 This routeMap was created to store a map of all routes within applications.
@@ -186,7 +213,8 @@ Returns **[boolean][7]** Return true if the compare match
 
 RoutesMap class extend Map class and has an edited get method to retrieve route from parameterized path.
 
-Be aware that the `has` method will still check for the exact match.
+> You must end the path with something which is not the id, this is invalid `users/:id`
+> Be aware that the `has` method will still check for the exact match.
 
 See: [https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map/get][8]
 
@@ -199,12 +227,12 @@ const routesMap = new RoutesMap([
 // get as usual (See https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map/get)
 const home = routesMap.get('/');
 // get as usual
-const editUser = routesMap.get('/users/:id');
+const editUser = routesMap.get('/users/:id/edit.html');
 // this is a valid path id
-const editUserCc = routesMap.get('/users/1');
+const editUserCc = routesMap.get('/users/1/edit.html');
 // this is invalid path id but RoutesMap can get it
 <pre>
-  routesMap.get('/users/1'):
+  routesMap.get('/users/1/edit.html'):
 
   {JSON.stringify(editUser, null, 2)}
 </pre>

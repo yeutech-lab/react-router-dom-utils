@@ -5,3 +5,4 @@ export { default as getRoutesMap } from './getRoutesMap';
 export { default as Link } from './Link';
 export { default as matchParamsPath } from './matchParamsPath';
 export { default as RoutesMap } from './RoutesMap';
+export { default as getRouteFromPath } from './getRouteFromPath';
