@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v3.1.0...v3.2.0) (2020-02-20)
+
+
+### Features
+
+* **RoutesMap:** now detecting all urls using path-to-regex ([f2f57cd](https://github.com/yeutech-lab/react-router-dom-utils/commit/f2f57cd6eaa6919ce941bbbaa8a1700fdc2a8b8e))
+
 # [3.1.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v3.0.2...v3.1.0) (2020-02-08)
 
 
