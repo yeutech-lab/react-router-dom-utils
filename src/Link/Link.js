@@ -331,6 +331,7 @@ export default class Link extends React.Component {
       staticContext, // eslint-disable-line react/prop-types
       waitChunk,
       onBeforePageChange,
+      push,
       ...rest
     } = this.props;
     return ContextConsumer ? (
