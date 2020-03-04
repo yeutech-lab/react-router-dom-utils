@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/yeutech-lab/react-router-dom-utils/compare/v3.2.0...v3.2.1) (2020-03-04)
+
+
+### Bug Fixes
+
+* **props:** remove push from spreaded props ([d6b8415](https://github.com/yeutech-lab/react-router-dom-utils/commit/d6b8415f6172e8bbb2dac915fa2d8ce198e0f7d6))
+
 # [3.2.0](https://github.com/yeutech-lab/react-router-dom-utils/compare/v3.1.0...v3.2.0) (2020-02-20)
 
 
